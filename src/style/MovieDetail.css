@@ -1,0 +1,29 @@
+#movie-detail {
+    display: grid;
+    height: 50vh;
+    /* width: 70vw; */
+    padding: 50px;
+    background-color: rgba(0, 0, 0, 0.2);
+    justify-self: center;
+    align-self: center;
+    justify-items: center;
+    align-items: center;
+    grid-template-areas: "image . title" "image . description";
+}
+
+#movie-detail>h3 {
+    grid-area: title
+}
+
+#movie-detail>img {
+    grid-area: image;
+    height: 500px;
+    width: 500px;
+}
+
+#movie-detail>p {
+    grid-area: description;
+    width: 80%;
+    color: white;
+    font-size: 24px;
+}

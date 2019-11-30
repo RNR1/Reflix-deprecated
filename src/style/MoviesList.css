@@ -1,0 +1,10 @@
+h3 {
+    font-size: 1.5em;
+    color: white;
+}
+
+.list {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+}

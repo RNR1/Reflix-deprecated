@@ -1,0 +1,38 @@
+.movie {
+    display: grid;
+}
+
+img {
+    border-radius: 5px;
+    width: 300px;
+    height: 300px;
+
+}
+
+.icon {
+    color: white;
+    position: relative;
+    justify-self: end;
+    align-self: center;
+    width: 10px;
+    margin-right: 3px;
+    top: 25px;
+    border: 2px solid #141414;
+    background-color: #141414;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.icon:click {
+    font-size: 80%;
+    transition-duration: 0.3s;
+}
+
+a {
+    display: grid;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    font-size: 0.8em;
+    align-self: start;
+}

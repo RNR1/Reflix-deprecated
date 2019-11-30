@@ -1,0 +1,28 @@
+#catalog {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-areas: "search budget" "results results";
+    justify-items: center;
+    align-items: baseline;
+}
+
+#budget {
+    grid-area: budget;
+    color: aquamarine;
+}
+
+input {
+    grid-area: search;
+    height: 4vh;
+    width: 50vh;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #141414;
+    color: blanchedalmond;
+}
+
+#results {
+    grid-area: results;
+    align-self: baseline;
+    width: 80vw;
+}
