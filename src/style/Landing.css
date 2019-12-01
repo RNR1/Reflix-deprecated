@@ -1,30 +1,55 @@
-#landing {
-    display: grid;
-    justify-self: center;
-    align-self: stretch;
-}
+@keyframes slide-in-bck-center {
+    0% {
+      transform: translateZ(600px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateZ(0);
+      opacity: 1;
+    }
+  }
 
-h1 {
+#landing>h1 {
+    font-size: 6vh;
     color: white;
-    text-align: center;
-    align-self: center;
+    position: relative;
+    top: 100px;
 }
 
 .profiles {
-    display: grid;
-    grid-auto-flow: column;
-    column-gap: 2em
+    display: inline-block;
+    position: relative;
+    top: 60px;
+    margin-top: 10vh;
+}
+.slide-in-bck-center {
+	animation: slide-in-bck-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.profiles>a {
+    display: inline-block;
 }
 
 .profile {
-    display: grid;
-    align-content: center;
+    display: inline-block;
+    position: relative;
     height: 150px;
-    width: 200px;
-    color: white;
-    font-size: 24px;
-    text-align: center;
-    text-decoration: none;
+    width: 150px; 
+    margin: 2px;
     border-radius: 10px;
-    border: 1px solid black;
+    border: 3px solid black;
+}
+
+.profiles a>p {
+    color: white;
+    display: block;
+    position: relative;
+    font-size: 24px;
+    margin: 0px;
+    text-decoration: none;
+}
+
+.profile:hover {
+    border: 3px solid white;
+    animation: border 0.5s
 }

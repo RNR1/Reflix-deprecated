@@ -15,12 +15,11 @@ class Movie extends Component {
     render() {
         let isRented = this.props.list === "rented"
 		return (
-        <div className='movie'>
-            {isRented ? <FontAwesomeIcon icon={faMinus} className="icon" onClick={this.returnMovie} /> : <FontAwesomeIcon icon={faPlus} className="icon" onClick={this.rentMovie} />}
+        <div className='movie slide-in-bck-center'>
             <Link to={`/movies/${this.props.info.id}`}>
             <img src={this.props.info.img} alt={this.props.info.title}/>
-            <h4>{this.props.info.title}</h4>
             </Link>
+            {isRented ? <FontAwesomeIcon icon={faMinus} className="icon" onClick={this.returnMovie} /> : <FontAwesomeIcon icon={faPlus} className="icon" onClick={this.rentMovie} />}
             
         </div>
         )

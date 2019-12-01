@@ -62,7 +62,8 @@ class App extends Component {
 				}
 			],
 			budget: 10,
-			rentPrice: 3
+			rentPrice: 3,
+			// currentPage: 
 		}
 	}
 
@@ -72,7 +73,7 @@ class App extends Component {
 		}
 		let movies = [...this.state.movies]
 		movies.find(m => m.id === parseInt(movieId)).isRented = true
-		this.setState({ movies, budget: this.state.budget - 3 })
+		this.setState({ movies, budget: this.state.budget - this.state.rentPrice })
 	}
 
 	returnMovie = movieId => {
@@ -89,11 +90,11 @@ class App extends Component {
 		return (
 			<Router>
 				<div className='App'>
-					<span id='main-links'>
+					<div id='main-links'>
+						<Link to="/" id='logo'>REFLIX</Link>
 						<Link to='/'>Home</Link>
 						<Link to='/catalog'>Catalog</Link>
-					</span>
-					<Link to="/" id='logo'>REFLIX</Link>
+					</div>
 					<Route exact path='/' component={Landing} />
 					<Route
 						exact path='/catalog'

@@ -62,24 +62,17 @@ class Catalog extends Component {
 
 	render() {
 		return (
-			<div id='container'>
-				<div id='catalog'>
-					<Search
-						searchValue={this.state.searchValue}
-						type={this.type}
-					/>
-					<div id='budget'>Budget: ${this.props.budget}</div>
-					{this.searchInProgress() ? (
-						<div id='results'>
-							{this.SearchResults()}
-						</div>
-					) : (
-						<div id='results'>
-							{this.RentedMovies()}
-							{this.MainCatalog()}
-						</div>
-					)}
-				</div>
+			<div id='catalog' >
+				<Search searchValue={this.state.searchValue} type={this.type} />
+				<div id='budget' >Budget: ${this.props.budget}</div>
+				{this.searchInProgress() ? (
+					<div id='results' className="slide-in-bck-center">{this.SearchResults()}</div>
+				) : (
+					<div id='results'>
+						{this.RentedMovies()}
+						{this.MainCatalog()}
+					</div>
+				)}
 			</div>
 		)
 	}

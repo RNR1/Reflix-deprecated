@@ -4,12 +4,9 @@ import { Link } from "react-router-dom"
 class Profile extends Component {
 	render() {
 		return (
-			<Link
-				to='/catalog'
-				className='profile'
-				style={{ backgroundColor: this.props.color }}
-			>
-				{this.props.name}
+			<Link to='/catalog'>
+				<img src={this.props.img} className="profile" alt="avatar" />
+				<p>{this.props.name}</p>
 			</Link>
 		)
 	}
