@@ -1,34 +1,31 @@
 #movie-detail {
     display: inline-block;
+    text-align: center;
     position: relative;
-    top: 100px;
+    top: 50px;
 }
 
 #movie-detail>h3 {
-    display: inline-block;
-    position: absolute;
-    left: 110px;
+    display: block;
+    position: relative;
     margin-top: 0px;
     top: 0px;
 }
 
 
-
 #movie-detail>img {
     display: inline-block;
     position: relative;
-    left: -100px;
-    top: 50px;
-    height: 30vmax;
-    width: 30vw;
+    height: 40vmax;
+    width: 50vw;
 }
 
 #movie-detail>p {
     color: white;
     display: inline-block;
     position: relative;
-    top: 30px;
+    /* top: 30px; */
     height: 5vh;
-    width: 80vw;
-    font-size: 1.5vmax;
+    /* width: 80vw; */
+    font-size: 2vmax;
 }

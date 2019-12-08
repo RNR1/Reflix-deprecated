@@ -1,11 +1,11 @@
 .App {
   background-color: #141414;
-  text-align: center;
+  height: 100vh;
 }
 
 #main-links {
   display: inline-block;  
-  position: absolute;
+  position: relative;
   left: 0;
   top: 0;
 }
@@ -18,11 +18,19 @@
   font-size: 1.2rem;
 }
 
-#main-links>#logo {
+#logo {
   display: inline-block;
+  position: relative;
+  text-align: start;
   padding: 10px;
   margin-right: 10px;
   color:#E50615;
   -webkit-text-stroke: medium;
   font-size: 4vmax;
+}
+
+@media (max-width: 767px) {                  
+  #main-links.hide {
+     display: none;
+  }
 }

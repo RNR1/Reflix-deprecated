@@ -1,42 +1,7 @@
-@-webkit-keyframes scale-up-hor-left {
-    0% {
-      -webkit-transform: scaleX(0.4);
-              transform: scaleX(0.4);
-      -webkit-transform-origin: 0% 0%;
-              transform-origin: 0% 0%;
-    }
-    100% {
-      -webkit-transform: scaleX(1);
-              transform: scaleX(1);
-      -webkit-transform-origin: 0% 0%;
-              transform-origin: 0% 0%;
-    }
-  }
-  @keyframes scale-up-hor-left {
-    0% {
-      -webkit-transform: scaleX(0.4);
-              transform: scaleX(0.4);
-      -webkit-transform-origin: 0% 0%;
-              transform-origin: 0% 0%;
-    }
-    100% {
-      -webkit-transform: scaleX(1);
-              transform: scaleX(1);
-      -webkit-transform-origin: 0% 0%;
-              transform-origin: 0% 0%;
-    }
-  }
 
-  @keyframes scale-up-hor-right {
-    0% {
-      transform: scaleX(0.4);
-      transform-origin: 100% 100%;
-    }
-    100% {
-      transform: scaleX(1);
-      transform-origin: 100% 100%;
-    }
-  }
+#catalog {
+  text-align: center;
+}
 
 #budget {
     display: inline-block;
@@ -47,14 +12,12 @@
 }
 
 #search-form {
-    display: table-cell;
-    position: absolute;
-    overflow: hidden;
-    right: 10px;
-    top: 10px;
-    height: 10vh;
-    width: 30vw;
-    
+  display: inline-block;
+  text-align: end;
+  position: absolute;
+  overflow: hidden;
+  right: 10px;
+  top: 20px;
 }
 
 .slide-in-bck-center {
@@ -62,36 +25,31 @@
     transition-duration: 1s;
 }
 
-.animate 
- { 
-  transition: all .5s;
-  -moz-transition: all .5s;
-  -webkit-transition: all .5s;
-  -o-transition: all .5s;
-  -ms-transition: all .5s;
- }
+
 
 #search-form>.search-icon {
     color: white;
     position: relative;
     margin-right: 10px;
-    -webkit-animation: scale-up-hor-right 0.6s alternate both;
-	        animation: scale-up-hor-right 0.6s alternate both;
+    cursor: pointer;
+    
 }
 
 input {
     height: 4vh;
     width: 30vh;
+    border: 1px solid white;
     border-radius: 10px;
     padding-left: 15px;
     background-color: #141414;
     position: relative;
-    right: 0px;
-    transition: width 0.4s ease-in-out;
+    /* right: 0px; */
     color: blanchedalmond;
-    -webkit-animation: scale-up-hor-right 0.6s alternate both;
-            animation: scale-up-hor-right 0.6s alternate both;
-            animation: scale-up-hor-left 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-    
+    transition: all 0.5s ease-in-out;
+}
+
+.hide {
+  width: 0px;
+  border: 0px;
 }
 

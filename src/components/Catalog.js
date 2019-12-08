@@ -4,9 +4,8 @@ import Search from "./Search"
 import MoviesList from "./MoviesList"
 
 class Catalog extends Component {
-	constructor(props) {
-		super(props)
-		this.props = props
+	constructor() {
+		super()
 		this.state = {
 			searchValue: ""
 		}
@@ -63,7 +62,7 @@ class Catalog extends Component {
 	render() {
 		return (
 			<div id='catalog' >
-				<Search searchValue={this.state.searchValue} type={this.type} />
+				<Search searchValue={this.state.searchValue} type={this.type} displayInput={this.props.displayInput} toggleInput={this.props.toggleInput} />
 				<div id='budget' >Budget: ${this.props.budget}</div>
 				{this.searchInProgress() ? (
 					<div id='results' className="slide-in-bck-center">{this.SearchResults()}</div>

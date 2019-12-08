@@ -63,8 +63,12 @@ class App extends Component {
 			],
 			budget: 10,
 			rentPrice: 3,
-			// currentPage: 
+			displayInput: false,
 		}
+	}
+
+	toggleInput = () => {
+		this.setState({displayInput: !this.state.displayInput})
 	}
 
 	rentMovie = movieId => {
@@ -90,8 +94,8 @@ class App extends Component {
 		return (
 			<Router>
 				<div className='App'>
-					<div id='main-links'>
 						<Link to="/" id='logo'>REFLIX</Link>
+					<div id='main-links' className={this.state.displayInput? "hide" : ""}>
 						<Link to='/'>Home</Link>
 						<Link to='/catalog'>Catalog</Link>
 					</div>
@@ -105,6 +109,8 @@ class App extends Component {
 								budget={this.state.budget}
 								rentMovie={this.rentMovie}
 								returnMovie={this.returnMovie}
+								displayInput={this.state.displayInput}
+								toggleInput={this.toggleInput}
 							/>
 						)}
 					/>

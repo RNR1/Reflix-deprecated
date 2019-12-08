@@ -4,12 +4,6 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons"
 
 
 class Search extends Component {
-	constructor() {
-		super()
-		this.state = {
-			displayInput: false
-		}
-	}
 
 	type = e => {
 		const searchValue = e.target.value
@@ -17,7 +11,7 @@ class Search extends Component {
 	}
 
 	toggleInput = () => {
-		this.setState({displayInput: !this.state.displayInput})
+		this.props.toggleInput()
 	}
 
 	render() {
@@ -27,11 +21,11 @@ class Search extends Component {
 				<input
 					type='textarea'
 					name='search'
-					className="scale-up-hor-left animate"
+					className={this.props.displayInput ? "" : "hide"}
+					autoFocus={this.props.displayInput}
 					placeholder='Search'
-					style={{display: this.state.displayInput ? "inline-block" : "none"}}
 					value={this.props.searchValue}
-					onChange={this.type}		
+					onChange={this.type}	
 				/>
 			</div>
 		)
