@@ -3,6 +3,7 @@ import '../style/MoviesList.css'
 import Movie from "./Movie"
 
 class MoviesList extends Component {
+	
 	render() {
         return (
 			<div id={this.props.list}>
@@ -18,6 +19,8 @@ class MoviesList extends Component {
                             list={this.props.list}
 							rentMovie={this.props.rentMovie}
                             returnMovie={this.props.returnMovie}
+							clearSearch={this.props.clearSearch}
+							toggleInput={this.props.toggleInput}
 						/>
 					))}
 				</div>

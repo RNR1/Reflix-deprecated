@@ -12,12 +12,16 @@ class Movie extends Component {
         this.props.returnMovie(this.props.info.id)
     }
 
+    toggleInput = () => this.props.toggleInput()
+
+    clearSearch = () => this.props.clearSearch()
+
     render() {
         let isRented = this.props.list === "rented"
 		return (
         <div className='movie slide-in-bck-center'>
             <Link to={`/movies/${this.props.info.id}`}>
-            <img src={this.props.info.img} alt={this.props.info.title}/>
+            <img onClick={this.toggleInput} src={this.props.info.img} alt={this.props.info.title}/>
             </Link>
             {isRented ? <FontAwesomeIcon icon={faMinus} className="icon" onClick={this.returnMovie} /> : <FontAwesomeIcon icon={faPlus} className="icon" onClick={this.rentMovie} />}
             
