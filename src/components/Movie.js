@@ -12,7 +12,7 @@ class Movie extends Component {
         this.props.returnMovie(this.props.info.id)
     }
 
-    toggleInput = () => this.props.toggleInput()
+    toggleInput = () => this.props.displayInput ? this.props.toggleInput() : null
 
     clearSearch = () => this.props.clearSearch()
 

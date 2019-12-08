@@ -20,6 +20,7 @@ class MoviesList extends Component {
 							rentMovie={this.props.rentMovie}
                             returnMovie={this.props.returnMovie}
 							clearSearch={this.props.clearSearch}
+							displayInput={this.props.displayInput}
 							toggleInput={this.props.toggleInput}
 						/>
 					))}

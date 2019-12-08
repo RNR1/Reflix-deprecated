@@ -17,6 +17,7 @@ class Catalog extends Component {
 					title='Rented'
 					rentMovie={this.props.rentMovie}
 					toggleInput={this.props.toggleInput}
+					displayInput={this.props.displayInput}
 					returnMovie={this.props.returnMovie}
 				/>
 			)
@@ -31,6 +32,7 @@ class Catalog extends Component {
 				list='main-catalog'
 				rentMovie={this.props.rentMovie}
 				toggleInput={this.props.toggleInput}
+				displayInput={this.props.displayInput}
 				returnMovie={this.props.returnMovie}
 			/>
 		)
@@ -48,6 +50,7 @@ class Catalog extends Component {
 				rentMovie={this.props.rentMovie}
 				returnMovie={this.props.returnMovie}
 				toggleInput={this.props.toggleInput}
+				displayInput={this.props.displayInput}
 				clearSearch={this.props.clearSearch}
 			/>
 		)
