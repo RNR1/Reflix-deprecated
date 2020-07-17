@@ -1,0 +1,65 @@
+@keyframes slide-in-bck-center {
+	0% {
+		transform: translateZ(600px);
+		opacity: 0;
+	}
+	100% {
+		transform: translateZ(0);
+		opacity: 1;
+	}
+}
+
+.SearchForm {
+	flex: 1.5;
+	display: flex;
+	justify-content: flex-end;
+	align-self: center;
+	align-items: center;
+	margin-right: 20px;
+}
+.SearchIcon {
+	color: white;
+	position: relative;
+	margin-right: 10px;
+	cursor: pointer;
+	animation: slide-in-bck-center 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+	transition-duration: 1s;
+}
+
+.SearchInput {
+	height: 40px;
+	width: 20vw;
+	border: 1px solid white;
+	border-radius: 5px;
+	padding-left: 15px;
+	background-color: #141414;
+	position: relative;
+	color: blanchedalmond;
+	animation: slide-in-bck-center 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+	transition: all 0.3s;
+}
+
+@media (max-width: 768px) {
+	.SearchForm {
+		align-self: flex-end;
+	}
+	.SearchInput {
+		width: 30vw;
+		height: 30px;
+	}
+}
+
+@media (max-width: 415px) {
+	.SearchForm {
+		margin-right: 20px;
+	}
+	.SearchInput {
+		height: 25px;
+	}
+}
+
+.Hide {
+	width: 0px;
+	border: 0px;
+	visibility: hidden;
+}
