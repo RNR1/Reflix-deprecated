@@ -7,3 +7,11 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 	background-color: #141414;
 }
+
+a {
+	text-decoration: none;
+	color: white;
+	text-align: center;
+	font-size: 0.8em;
+	align-self: start;
+}
