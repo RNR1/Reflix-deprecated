@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import classes from '../style/Catalog.module.css'
 import Movies from '../components/Movies/Movies'
@@ -7,14 +7,7 @@ import useSearch from '../hooks/useSearch'
 
 export default function CatalogPage() {
 	const { movies, areRented, budget } = useMovies()
-	const { searchInProgress, searchResults, clearSearch } = useSearch()
-
-	useEffect(() => {
-		return () => {
-			clearSearch()
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
+	const { searchInProgress, searchResults } = useSearch()
 
 	return (
 		<div className={classes.Catalog}>

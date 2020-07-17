@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useCallback } from 'react'
 import { MoviesContext } from '../context/movies'
 import { SearchContext } from '../context/search'
 
@@ -25,7 +25,14 @@ export default function useSearch() {
 			m.title.toLowerCase().includes(searchValue.toLowerCase())
 		)
 
-	const clearSearch = () => setSearchValue('')
+	const clearSearch = useCallback(() => setSearchValue(''), [setSearchValue])
+
+	useEffect(() => {
+		return () => {
+			clearSearch()
+			setDisplaySearch(false)
+		}
+	}, [clearSearch, setDisplaySearch])
 
 	return {
 		clearSearch,
