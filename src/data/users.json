@@ -1,18 +1,26 @@
 [
 	{
 		"name": "Mona",
-		"img": "https://mir-s3-cdn-cf.behance.net/project_modules/disp/bf6e4a33850498.56ba69ac3064f.png"
+		"img": "https://mir-s3-cdn-cf.behance.net/project_modules/disp/bf6e4a33850498.56ba69ac3064f.png",
+		"budget": 20,
+		"rentals": []
 	},
 	{
 		"name": "Jasmyne",
-		"img": "https://mir-s3-cdn-cf.behance.net/project_modules/disp/366be133850498.56ba69ac36858.png"
+		"img": "https://mir-s3-cdn-cf.behance.net/project_modules/disp/366be133850498.56ba69ac36858.png",
+		"budget": 20,
+		"rentals": []
 	},
 	{
 		"name": "Aura",
-		"img": "https://mir-s3-cdn-cf.behance.net/project_modules/disp/fd69a733850498.56ba69ac2f221.png"
+		"img": "https://mir-s3-cdn-cf.behance.net/project_modules/disp/fd69a733850498.56ba69ac2f221.png",
+		"budget": 20,
+		"rentals": []
 	},
 	{
 		"name": "Tina",
-		"img": "https://mir-s3-cdn-cf.behance.net/project_modules/disp/e70b1333850498.56ba69ac32ae3.png"
+		"img": "https://mir-s3-cdn-cf.behance.net/project_modules/disp/e70b1333850498.56ba69ac32ae3.png",
+		"budget": 20,
+		"rentals": []
 	}
 ]

@@ -10,8 +10,9 @@ export default function Movies({ list, title, movies }) {
 				{list === 'search-results' && movies.length === 0 ? (
 					<h3 className={classes.NoMatches}>No Matching Results</h3>
 				) : (
-					movies?.map((movie) => (
-						<Movie key={movie.id} list={list} {...movie} />
+					movies.length &&
+					movies.map((movie) => (
+						<Movie key={movie._id.$oid} list={list} {...movie} />
 					))
 				)}
 			</div>

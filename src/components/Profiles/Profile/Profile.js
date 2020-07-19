@@ -1,17 +1,17 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 
 import classes from './Profile.module.css'
+import useProfile from '../../../hooks/useProfiles'
 
-class Profile extends Component {
-	render() {
-		return (
-			<Link to='/catalog'>
-				<img src={this.props.img} className={classes.Profile} alt='avatar' />
-				<p className={classes.Name}>{this.props.name}</p>
-			</Link>
-		)
-	}
+export default function Profile({ _id, img, name }) {
+	const { selectProfile } = useProfile()
+	return (
+		<Link
+			to={`/catalog?profile=${_id.$oid}`}
+			onClick={() => selectProfile(_id.$oid)}>
+			<img src={img} className={classes.Profile} alt={name} />
+			<p className={classes.Name}>{name}</p>
+		</Link>
+	)
 }
-
-export default Profile

@@ -1,22 +1,32 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useCallback } from 'react'
 import { MoviesContext } from '../context/movies'
+import { Movies } from '../api/agent'
 
 export default function useMovies() {
-	const { movies, setMovies, budget, setBudget } = useContext(MoviesContext)
+	const { movies, setMovies } = useContext(MoviesContext)
 	const rentPrice = 3
 
+	const fetchMovies = useCallback(
+		() => Movies.list().then((movies) => setMovies(movies)),
+		[setMovies]
+	)
+
+	useEffect(() => {
+		fetchMovies()
+	}, [fetchMovies])
+
 	const getMovieDetails = (movieId) =>
-		movies.find((m) => m.id === parseInt(movieId))
+		movies.find((movie) => movie._id.$oid === movieId)
 
-	const areRented = movies.some((m) => m.isRented)
+	// const areRented = movies.some((m) => m.isRented)
 
-	const cantAffordRent = () => budget - rentPrice < 0
+	const cantAffordRent = (budget) => budget - rentPrice < 0
 
 	const returnMovie = (movieId) => {
 		const updatedMovies = movies
-		updatedMovies.find((m) => m.id === parseInt(movieId)).isRented = false
+		// updatedMovies.find((m) => m.id === parseInt(movieId)).isRented = false
 		setMovies([...updatedMovies])
-		setBudget(budget + rentPrice)
+		// setBudget(budget + rentPrice)
 	}
 
 	const rentMovie = (movieId) => {
@@ -24,10 +34,16 @@ export default function useMovies() {
 			return alert('insufficient funds')
 		}
 		const updatedMovies = movies
-		updatedMovies.find((m) => m.id === parseInt(movieId)).isRented = true
+		// updatedMovies.find((m) => m.id === parseInt(movieId)).isRented = true
 		setMovies([...updatedMovies])
-		setBudget(budget - rentPrice)
+		// setBudget(budget - rentPrice)
 	}
 
-	return { movies, budget, areRented, returnMovie, rentMovie, getMovieDetails }
+	return {
+		movies,
+		// budget,
+		/* areRented, */ returnMovie,
+		rentMovie,
+		getMovieDetails
+	}
 }
