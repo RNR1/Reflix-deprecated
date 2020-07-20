@@ -5,10 +5,10 @@ import ProfilesContextProvider from './profiles'
 
 export default function RootContextProvider({ children }) {
 	return (
-		<ProfilesContextProvider>
-			<MoviesContextProvider>
+		<MoviesContextProvider>
+			<ProfilesContextProvider>
 				<SearchContextProvider>{children}</SearchContextProvider>
-			</MoviesContextProvider>
-		</ProfilesContextProvider>
+			</ProfilesContextProvider>
+		</MoviesContextProvider>
 	)
 }

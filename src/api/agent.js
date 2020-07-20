@@ -16,5 +16,7 @@ export const Movies = {
 }
 
 export const Profiles = {
-	list: () => requests.get('/profiles')
+	list: () => requests.get('/profiles'),
+	rent: (action, profile, movie) =>
+		requests.put(`/profile/${action}?profile=${profile}&movie=${movie}`)
 }

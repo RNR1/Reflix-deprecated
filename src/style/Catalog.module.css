@@ -12,7 +12,10 @@
 .Catalog {
 	width: 100%;
 	margin: 80px auto;
-	animation: slide-in-bck-center 0.5s;
+}
+
+.Slide {
+	animation: slide-in-bck-center 0.3s;
 }
 
 .Budget {

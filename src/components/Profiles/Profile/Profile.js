@@ -2,10 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import classes from './Profile.module.css'
-import useProfile from '../../../hooks/useProfiles'
+import useProfiles from '../../../hooks/useProfiles'
 
 export default function Profile({ _id, img, name }) {
-	const { selectProfile } = useProfile()
+	const { selectProfile } = useProfiles()
 	return (
 		<Link
 			to={`/catalog?profile=${_id.$oid}`}
