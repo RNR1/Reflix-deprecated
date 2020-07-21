@@ -2,6 +2,8 @@
 	"imports": {
 		"dotenv": "https://deno.land/x/dotenv/mod.ts",
 		"oak": "https://deno.land/x/oak@main/mod.ts",
-		"mongo": "https://deno.land/x/mongo@v0.9.1/mod.ts"
+		"mongo": "https://deno.land/x/mongo@v0.9.1/mod.ts",
+		"path": "https://deno.land/std/path/mod.ts",
+		"flags": "https://deno.land/std/flags/mod.ts"
 	}
 }

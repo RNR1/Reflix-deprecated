@@ -11,7 +11,9 @@ const config: DenonConfig = {
 	},
 	allow: ['env', 'plugin', 'read', 'write', 'net'],
 	importmap: './importmap.json',
-	unstable: true
+	unstable: true,
+	tsconfig: './tsconfig.json',
+	watch: false
 }
 
 export default config

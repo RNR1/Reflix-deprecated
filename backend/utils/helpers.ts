@@ -1,5 +1,5 @@
-import { RouterContext } from 'https://deno.land/x/oak@main/mod.ts'
-import { ObjectId, WithID } from 'https://deno.land/x/mongo@v0.9.1/mod.ts'
+import { RouterContext } from 'oak'
+import { ObjectId, WithID } from 'mongo'
 import { getDb } from '../config/db_client.ts'
 import { RENT_PRICE } from './../config/consts.ts'
 

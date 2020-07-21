@@ -1,11 +1,17 @@
-import { config } from 'https://deno.land/x/dotenv/mod.ts'
-import { Application } from 'https://deno.land/x/oak@main/mod.ts'
+import { Application, send } from 'oak'
+import * as path from 'path'
+import { parse } from 'flags'
+import { config as env } from 'dotenv'
 
 import { movies, profiles } from './routes/index.ts'
 import { connect } from './config/db_client.ts'
 
-config()
+env()
 connect()
+
+const port = Number(Deno.env.get('PORT')!)
+const { args } = Deno
+const argPort = parse(args).port
 
 const app = new Application()
 
@@ -24,4 +30,12 @@ app.use(movies.allowedMethods())
 app.use(profiles.routes())
 app.use(profiles.allowedMethods())
 
-await app.listen({ port: 8000 })
+app.use(async (ctx) => {
+	const filePath = path.join(Deno.cwd(), 'static', 'build')
+	await send(ctx, ctx.request.url.pathname, {
+		root: filePath,
+		index: 'index.html'
+	})
+})
+
+await app.listen({ port: argPort ? Number(argPort) : port })

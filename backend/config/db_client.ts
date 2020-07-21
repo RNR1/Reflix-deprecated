@@ -1,4 +1,4 @@
-import { MongoClient, Database } from 'https://deno.land/x/mongo@v0.9.1/mod.ts'
+import { MongoClient, Database } from 'mongo'
 import 'https://deno.land/x/dotenv/load.ts'
 
 let db: Database

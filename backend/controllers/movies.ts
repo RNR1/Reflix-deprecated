@@ -1,9 +1,8 @@
-import { ObjectId } from 'https://deno.land/x/mongo@v0.9.1/mod.ts'
-import { RouterContext } from 'https://deno.land/x/oak@main/mod.ts'
+import { ObjectId } from 'mongo'
+import { RouterContext } from 'oak'
 
 import { getDb } from '../config/db_client.ts'
 import Movie from '../models/Movie.ts'
-import { extractContextBody } from '../utils/helpers.ts'
 
 export async function getMovies(ctx: RouterContext) {
 	try {

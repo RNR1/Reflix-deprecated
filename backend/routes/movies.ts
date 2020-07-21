@@ -1,9 +1,10 @@
-import { Router } from 'https://deno.land/x/oak@main/mod.ts'
+import { Router } from 'oak'
 import * as moviesController from '../controllers/movies.ts'
+import { API_URL } from '../config/consts.ts'
 
 const router = new Router()
 
-router.get('/movies', moviesController.getMovies)
-router.get('/movie/:id', moviesController.getMovie)
+router.get(`${API_URL}/movies`, moviesController.getMovies)
+router.get(`${API_URL}/movie/:id`, moviesController.getMovie)
 
 export default router
