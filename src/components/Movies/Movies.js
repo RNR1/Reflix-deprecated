@@ -8,14 +8,13 @@ function NoMatches() {
 	return <h3 className={classes.NoMatches}>No Matching Results</h3>
 }
 
-export default function Movies({ list, title, movies }) {
-	console.log(list, title, movies)
+export default function Movies({ title, movies, isSearching }) {
 	const { currentProfile } = useProfiles()
 	return (
-		<div className={classes[list]}>
+		<>
 			<h3 className={classes.Title}>{title}</h3>
 			<div className={classes.List}>
-				{list === 'search-results' && !movies.length ? (
+				{isSearching && !movies.length ? (
 					<NoMatches />
 				) : movies.length ? (
 					movies.map((movie) => (
@@ -26,6 +25,7 @@ export default function Movies({ list, title, movies }) {
 									(m) => m._id.$oid === movie._id.$oid
 								) >= 0
 							}
+							profile={currentProfile?._id.$oid}
 							{...movie}
 						/>
 					))
@@ -33,6 +33,6 @@ export default function Movies({ list, title, movies }) {
 					<Spinner />
 				)}
 			</div>
-		</div>
+		</>
 	)
 }

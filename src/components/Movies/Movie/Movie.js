@@ -5,11 +5,11 @@ import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 import classes from './Movie.module.css'
 import useProfiles from '../../../hooks/useProfiles'
 
-export default function Movie({ _id, img, title, isRented }) {
+export default function Movie({ _id, img, title, isRented, profile }) {
 	const { rentalAction } = useProfiles()
 	return (
 		<div className={[classes.Movie, 'slide-in-bck-center'].join(' ')}>
-			<Link to={`/movies/${_id.$oid}`}>
+			<Link to={`/movies/${_id.$oid}?profile=${profile}`}>
 				<img className={classes.Img} src={img} alt={title} />
 			</Link>
 			{isRented ? (

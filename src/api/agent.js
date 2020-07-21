@@ -12,11 +12,13 @@ const requests = {
 }
 
 export const Movies = {
-	list: () => requests.get('/movies')
+	list: () => requests.get('/movies'),
+	movie: (id) => requests.get(`movie/${id}`)
 }
 
 export const Profiles = {
 	list: () => requests.get('/profiles'),
+	profile: (id) => requests.get(`/profile/${id}`),
 	rent: (action, profile, movie) =>
 		requests.put(`/profile/${action}?profile=${profile}&movie=${movie}`)
 }

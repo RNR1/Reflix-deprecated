@@ -2,6 +2,8 @@ import { useContext, useCallback } from 'react'
 import { ProfilesContext } from '../context/profiles'
 import { Profiles } from '../api/agent'
 import { RENT_PRICE } from '../config/consts'
+import useQuery from './useQuery'
+import { useHistory } from 'react-router-dom'
 
 export default function useProfiles() {
 	const {
@@ -10,21 +12,51 @@ export default function useProfiles() {
 		currentProfile,
 		setCurrentProfile
 	} = useContext(ProfilesContext)
+	const history = useHistory()
+	const query = useQuery()
 
 	const fetchProfiles = useCallback(
-		() => Profiles.list().then(({ profiles }) => setProfiles(profiles)),
+		() =>
+			Profiles.list()
+				.then(({ profiles }) => setProfiles(profiles))
+				.catch((error) => console.log(error.message)),
 		[setProfiles]
 	)
 
-	const isProfile = (id) => profiles.findIndex((p) => p._id.$oid === id) !== -1
+	const fetchProfile = useCallback(
+		(id) =>
+			Profiles.profile(id)
+				.then((profile) => setCurrentProfile(profile))
+				.catch((error) => {
+					throw error
+				}),
+		[setCurrentProfile]
+	)
 
 	const selectProfile = useCallback(
-		(profileId) => {
+		async (profileId) => {
+			if (profileId === null) return setCurrentProfile(null)
 			const profile = profiles.find((profile) => profile._id.$oid === profileId)
-			setCurrentProfile(profile)
+			if (!profile)
+				try {
+					await fetchProfile(profileId)
+				} catch (error) {
+					throw new Error(error.message)
+				}
+			else setCurrentProfile(profile)
 		},
-		[setCurrentProfile, profiles]
+		[setCurrentProfile, profiles, fetchProfile]
 	)
+
+	const renderCurrentProfile = useCallback(async () => {
+		const profile = query.get('profile')
+		if (!profile) return history.replace('/')
+		try {
+			await selectProfile(profile)
+		} catch (error) {
+			history.replace('/')
+		}
+	}, [selectProfile, history, query])
 
 	const cantAffordRent = useCallback(
 		() => currentProfile?.budget - RENT_PRICE < 0,
@@ -38,13 +70,12 @@ export default function useProfiles() {
 				if (action === 'rent' && cantAffordRent())
 					throw new Error('Insufficient funds')
 				await Profiles.rent(action, profileId, movieId)
-				await fetchProfiles()
-				selectProfile(profiles.find((p) => p._id.$oid === profileId))
+				fetchProfile(profileId)
 			} catch (error) {
 				console.log(error.message)
 			}
 		},
-		[currentProfile, cantAffordRent, fetchProfiles, selectProfile, profiles]
+		[currentProfile, cantAffordRent, fetchProfile]
 	)
 
 	const isRented = (movieId) =>
@@ -55,7 +86,7 @@ export default function useProfiles() {
 		fetchProfiles,
 		currentProfile,
 		selectProfile,
-		isProfile,
+		renderCurrentProfile,
 		isRented,
 		rentalAction
 	}

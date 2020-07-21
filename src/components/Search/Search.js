@@ -14,10 +14,9 @@ export default function Search({ displaySearch, onChange, onClick, value }) {
 				onClick={onClick}
 			/>
 			<input
-				type='textarea'
+				type='text'
 				name='search'
 				className={inputClasses.join(' ')}
-				autoFocus={displaySearch}
 				placeholder='Search'
 				onChange={onChange}
 				value={value}

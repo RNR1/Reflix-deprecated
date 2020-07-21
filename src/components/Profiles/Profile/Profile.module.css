@@ -1,6 +1,4 @@
-.Profile {
-	display: inline-block;
-	position: relative;
+.Img {
 	height: 120px;
 	width: 120px;
 	margin: 10px;
@@ -8,7 +6,7 @@
 	border: 3px solid #141414;
 }
 
-.Profile:hover {
+.Img:hover {
 	border: 3px solid white;
 	animation: border 0.5s;
 }

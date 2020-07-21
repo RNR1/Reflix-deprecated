@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react'
 import classes from '../style/Landing.module.css'
 import Profiles from '../components/Profiles/Profiles'
-import useProfiles from '../hooks/useProfiles'
+import useDataFetch from '../hooks/useDataFetch'
 
 export default function LandingPage() {
-	const { fetchProfiles, profiles } = useProfiles()
+	const { fetchLandingData } = useDataFetch()
 
 	useEffect(() => {
-		if (!profiles.length) fetchProfiles()
-	}, [profiles, fetchProfiles])
+		fetchLandingData()
+	}, [fetchLandingData])
 
 	return (
 		<div className={classes.Landing}>

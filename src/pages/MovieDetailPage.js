@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import classes from '../style/MovieDetail.module.css'
-import { useRouteMatch } from 'react-router-dom'
-import useMovies from '../hooks/useMovies'
+import { useParams } from 'react-router-dom'
+import Spinner from '../components/Spinner/Spinner'
+import useDataFetch from '../hooks/useDataFetch'
 
 export default function MovieDetailPage() {
 	const [movie, setMovie] = useState()
-	const {
-		params: { id }
-	} = useRouteMatch()
-	const { getMovieDetails } = useMovies()
+	const { id } = useParams()
+	const { fetchMovieData } = useDataFetch()
 
 	useEffect(() => {
-		setMovie(getMovieDetails(id))
-	}, [getMovieDetails, id])
+		fetchMovieData(id, setMovie)
+	}, [id, movie, fetchMovieData])
 
-	if (!movie) return null
+	if (!movie) return <Spinner />
 	return (
 		<div className={classes.MovieDetail}>
 			<h3 className={classes.Title}>

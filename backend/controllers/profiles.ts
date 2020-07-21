@@ -7,40 +7,64 @@ import {
 
 import { getDb } from '../config/db_client.ts'
 import Profile from '../models/Profile.ts'
-import { DEFAULT_BUDGET, RENT_PRICE } from './../config/consts.ts'
+import { DEFAULT_BUDGET as budget } from './../config/consts.ts'
+import {
+	extractContextBody,
+	validateAction,
+	validateInputs,
+	checkRentalExistence,
+	getRentalCommand
+} from '../utils/helpers.ts'
+
+const lookupAggregation = {
+	$lookup: {
+		from: 'movies',
+		localField: 'rentals',
+		foreignField: '_id',
+		as: 'rentals'
+	}
+}
 
 export async function getProfiles(ctx: RouterContext) {
 	try {
 		const profiles = await getDb()
 			.collection<Profile[]>('profiles')
-			.aggregate([
-				{
-					$lookup: {
-						from: 'movies',
-						localField: 'rentals',
-						foreignField: '_id',
-						as: 'rentals'
-					}
-				}
-			])
+			.aggregate([lookupAggregation])
 		ctx.response.body = { profiles }
 	} catch (error) {
-		console.log(error)
+		ctx.response.status = 500
+		ctx.response.body = error.message
+	}
+}
+
+export async function getProfile(ctx: RouterContext) {
+	try {
+		const { id } = ctx.params
+		if (!id) throw new Error('Profile id is missing')
+		const _id = ObjectId(id)
+
+		const profile = await getDb()
+			.collection('profiles')
+			.aggregate([{ $match: { _id } }, lookupAggregation])
+		if (!profile) throw new Error('Profile Not Found')
+		ctx.response.body = profile[0]
+	} catch (error) {
+		ctx.response.status = 404
+		ctx.response.body = error.message
 	}
 }
 
 export async function addProfile(ctx: RouterContext) {
 	try {
-		if (!ctx.request.hasBody) throw new Error('Profile data is missing')
-		const body = await ctx.request.body()
-		const { name, img }: Profile = await body.value
+		const { name, img }: Profile = await extractContextBody(ctx)
 		if (!name || !img) throw new Error('Incorrect profile data')
-		const profile: Profile = { name, img, budget: DEFAULT_BUDGET, rentals: [] }
+		const profile: Profile = { name, img, budget, rentals: [] }
 		const _id = await getDb().collection('profiles').insertOne(profile)
 		profile._id = _id
 
 		ctx.response.body = { message: 'Profile created', profile }
 	} catch (error) {
+		ctx.response.status = 400
 		ctx.response.body = { message: error.message }
 	}
 }
@@ -66,45 +90,4 @@ export async function rentMovie(ctx: RouterContext) {
 		ctx.response.status = 400
 		ctx.response.body = { message: error.message }
 	}
-}
-function getRentalCommand(
-	action: string,
-	exists: WithID | null,
-	movie: string
-) {
-	let command
-	if (action === 'rent') {
-		if (exists) throw new Error('Movie already rented')
-		command = {
-			$inc: { budget: -RENT_PRICE },
-			$addToSet: { rentals: ObjectId(movie) }
-		}
-	}
-
-	if (action === 'return') {
-		if (!exists) throw new Error("movie isn't rented")
-		command = {
-			$inc: { budget: RENT_PRICE },
-			$pull: { rentals: ObjectId(movie) }
-		}
-	}
-	return command
-}
-
-function checkRentalExistence(profile: string, movie: string) {
-	return getDb()
-		.collection('profiles')
-		.findOne({
-			_id: ObjectId(profile),
-			rentals: { $in: [ObjectId(movie)] }
-		})
-}
-
-function validateInputs(profile: string, movie: string) {
-	if (!profile || !movie) throw new Error('Profile and/or Movie are missing')
-}
-
-function validateAction(action: string) {
-	if (action !== 'rent' && action !== 'return')
-		throw new Error('Invalid operation')
 }
