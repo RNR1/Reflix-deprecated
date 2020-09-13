@@ -1,9 +1,5 @@
-import { RouterContext, helpers } from "https://deno.land/x/oak@main/mod.ts"
-import {
-  ObjectId,
-  FilterType,
-  WithID,
-} from "https://deno.land/x/mongo@v0.9.1/mod.ts"
+import { RouterContext, helpers } from "oak"
+import { ObjectId, FilterType, WithID } from "mongo"
 
 import { getDb } from "../config/db_client.ts"
 import Profile from "../models/Profile.ts"
