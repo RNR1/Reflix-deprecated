@@ -1,0 +1,14 @@
+.Logo {
+	align-self: flex-end;
+	margin: 0 10px 0 10px;
+	line-height: 1;
+	color: #e50615;
+	-webkit-text-stroke: medium;
+	font-size: 4vmax;
+}
+
+@media (min-width: 1150px) {
+	.Logo {
+		font-size: 3vmax;
+	}
+}

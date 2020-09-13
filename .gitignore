@@ -1,0 +1,4 @@
+backend/.env
+.vscode
+backend/.deno_plugins
+client/.env
