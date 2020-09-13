@@ -1,0 +1,13 @@
+{
+  "name": "reflix",
+  "version": "1.0.0",
+  "description": "A movie rental app built with React and Deno",
+  "repository": "https://github.com/RNR1/Reflix.git",
+  "author": "Ron Braha <Ron.Braha@icloud.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "client"
+  ]
+}
