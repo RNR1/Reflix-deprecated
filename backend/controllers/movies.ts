@@ -1,8 +1,8 @@
 import { ObjectId } from "mongo"
-import { RouterContext } from "oak"
+import type { RouterContext } from "oak"
 
 import { getDb } from "../config/db_client.ts"
-import type Movie from "../models/Movie.ts"
+import type { Movie } from "../models/Movie.ts"
 
 export async function getMovies(ctx: RouterContext) {
   try {

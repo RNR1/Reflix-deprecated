@@ -1,6 +1,6 @@
-import Movie from "./Movie.ts"
+import type { Movie } from "./Movie.ts"
 
-export default interface Profile {
+export interface Profile {
   _id?: { $oid: string }
   name: string
   img: string

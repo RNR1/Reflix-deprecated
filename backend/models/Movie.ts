@@ -1,4 +1,4 @@
-export default interface Movie {
+export interface Movie {
   _id: { $oid: string }
   title: string
   year: number

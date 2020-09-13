@@ -1,8 +1,9 @@
-import { RouterContext, helpers } from "oak"
+import { helpers } from "oak"
+import type { RouterContext } from "oak"
 import { ObjectId, FilterType, WithID } from "mongo"
 
 import { getDb } from "../config/db_client.ts"
-import type Profile from "../models/Profile.ts"
+import type { Profile } from "../models/Profile.ts"
 import { DEFAULT_BUDGET as budget } from "./../config/consts.ts"
 import {
   extractContextBody,
