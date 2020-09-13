@@ -9,5 +9,11 @@
   "workspaces": [
     "backend",
     "client"
-  ]
+  ],
+  "scripts": {
+    "dotenv": "cd backend && cp .sample.env .env && cd ../client && cp .sample.env .env",
+    "install-client": "cd client && yarn install",
+    "server": "cd backend && deno run -c tsconfig.json --importmap=import_map.json --allow-net --allow-env --allow-plugin --allow-read --allow-write --unstable app.ts --port=${PORT}",
+    "client": "cd client && yarn start"
+  }
 }

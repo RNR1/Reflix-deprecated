@@ -5,27 +5,31 @@ Users are able to choose their user and rent movies based on their budget.
 Each user has a unique budget.
 Users can also click on the movie to see more information about the movie.
 
-Demo: [https://rons-reflix.herokuapp.com/](https://rons-reflix.herokuapp.com/)
+Demo: [https://rons-reflix.vercel.app/](https://rons-reflix.vercel.app/)
 
 ## Table Of Contents
 
 - [Reflix](#reflix)
   - [Table Of Contents](#table-of-contents)
-  - [Running the project](#running-the-project)
+  - [Installation](#installation)
   - [Screenshots](#screenshots)
     - [Who's watching?](#whos-watching)
     - [Movie Catalog](#movie-catalog)
     - [Search Filter](#search-filter)
     - [Rented Movies](#rented-movies)
     - [Movie Details](#movie-details)
-  - [Tech-stack](#tech-stack)
+  - [Tech-stack - Client](#tech-stack---client)
+  - [Tech-stack - Backend](#tech-stack---backend)
 
-## Running the project
+## Installation
 
-1. Clone the repo.
-2. Run `npm install`.
-3. Run `npm start`.
-4. Navigate to `http://localhost:3000` (or other port based on the message in the console).
+1. Clone the repository and navigate to root directory.
+2. Run `yarn install-client` to install client app dependencies.
+3. Run `yarn dotenv` to generate .env files for both client and server.
+4. Enter database credentials in `./backend/.env`.
+5. Run `yarn server`.
+6. Run `yarn client` to start client app.
+7. Navigate to `http://localhost:3000`.
 
 ## Screenshots
 
@@ -59,10 +63,15 @@ A user can click on a movie to see more information about the movie.
 
 <p align="center"><img src="assets/movie-detail.png" width="300" /></p>
 
-## Tech-stack
+## Tech-stack - Client
 
-1. React
-2. TypeScript
-3. Deno
-4. Oak
-5. MongoDB
+1. TypeScript.
+2. UI - React.
+3. State management - Redux toolkit.
+4. HTTP Client - Axios.
+
+## Tech-stack - Backend
+
+5. Deno.
+6. REST framework - Oak.
+7. Database - MongoDB-Atlas.
