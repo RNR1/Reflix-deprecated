@@ -1,5 +1,4 @@
-import { Application, send } from "oak"
-import * as path from "path"
+import { Application } from "oak"
 import { parse } from "flags"
 import { config as env } from "dotenv"
 import { oakCors } from "cors"
