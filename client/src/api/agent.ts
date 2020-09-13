@@ -2,19 +2,18 @@ import axios, { AxiosResponse } from "axios"
 import Movie from "../models/Movie"
 import Profile from "../models/Profile"
 
-axios.defaults.baseURL =
-  process.env.NODE_ENV === "development"
-    ? process.env.REACT_APP_API_URL
-    : "/api"
+const client = axios.create({
+  baseURL: process.env.REACT_APP_API_URL,
+})
 
 const responseBody = (response: AxiosResponse) => response.data
 
 const requests = {
-  get: (url: string) => axios.get(url).then(responseBody),
-  post: (url: string, body: {}) => axios.post(url, body).then(responseBody),
+  get: (url: string) => client.get(url).then(responseBody),
+  post: (url: string, body: {}) => client.post(url, body).then(responseBody),
   put: (url: string, body?: {} | null) =>
-    axios.put(url, body).then(responseBody),
-  delete: (url: string) => axios.delete(url).then(responseBody),
+    client.put(url, body).then(responseBody),
+  delete: (url: string) => client.delete(url).then(responseBody),
 }
 
 export const Movies = {
