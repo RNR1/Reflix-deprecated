@@ -1,5 +1,6 @@
-import { RouterContext } from "oak"
-import { ObjectId, WithID } from "mongo"
+import type { RouterContext } from "oak"
+import type { WithID } from "mongo"
+import { ObjectId } from "mongo"
 import { getDb } from "../config/db_client.ts"
 import { RENT_PRICE } from "./../config/consts.ts"
 
