@@ -10,7 +10,7 @@ const config: DenonConfig = {
     },
   },
   allow: ["env", "plugin", "read", "write", "net"],
-  importmap: "./importmap.json",
+  importmap: "./import_map.json",
   unstable: true,
   tsconfig: "./tsconfig.json",
   watch: true,

@@ -1,1 +1,1 @@
-web: cd backend && deno run --importmap=importmap.json --allow-net --allow-env --allow-plugin --allow-read --allow-write --unstable app.ts --port=${PORT}
+web: cd backend && deno run --importmap=import_map.json --allow-net --allow-env --allow-plugin --allow-read --allow-write --unstable app.ts --port=${PORT}
