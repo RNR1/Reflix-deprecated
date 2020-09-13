@@ -1,11 +1,11 @@
 {
-	"compilerOptions": {
-		"plugins": [
-			{
-				"name": "typescript-deno-plugin",
-				"enable": true, // default is `true`
-				"importmap": "./importmap.json"
-			}
-		]
-	}
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "typescript-deno-plugin",
+        "enable": true, // default is `true`
+        "importmap": "./import_map.json"
+      }
+    ]
+  }
 }
