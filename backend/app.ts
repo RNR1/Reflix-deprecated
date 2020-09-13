@@ -2,6 +2,7 @@ import { Application, send } from "oak"
 import * as path from "path"
 import { parse } from "flags"
 import { config as env } from "dotenv"
+import { oakCors } from "cors"
 
 import { movies, profiles } from "./routes/index.ts"
 import { connect } from "./config/db_client.ts"
@@ -15,15 +16,7 @@ const argPort = parse(args).port
 
 const app = new Application()
 
-app.use(async (ctx, next) => {
-  ctx.response.headers.set("Access-Control-Allow-Origin", "*")
-  ctx.response.headers.set(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE"
-  )
-  ctx.response.headers.set("Access-Control-Allow-Headers", "Content-Type")
-  await next()
-})
+app.use(oakCors())
 
 app.use(movies.routes())
 app.use(movies.allowedMethods())
