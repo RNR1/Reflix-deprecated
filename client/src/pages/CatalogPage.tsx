@@ -35,9 +35,6 @@ export default function CatalogPage() {
   if (!currentProfile) return <Spinner />
   return (
     <div className={catalogClasses.join(" ")}>
-      {currentProfile && (
-        <div className={classes.Budget}>Budget: ${currentProfile.budget}</div>
-      )}
       {searchInProgress() ? (
         <Movies movies={searchResults} title="Search Results" isSearching />
       ) : (

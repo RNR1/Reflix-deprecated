@@ -1,25 +1,19 @@
 @keyframes slide-in-bck-center {
-	0% {
-		transform: translateZ(600px);
-		opacity: 0;
-	}
-	100% {
-		transform: translateZ(0);
-		opacity: 1;
-	}
+  0% {
+    transform: translateZ(600px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateZ(0);
+    opacity: 1;
+  }
 }
 
 .Catalog {
-	width: 100%;
-	margin: 80px auto;
+  width: 100%;
+  margin: 80px auto;
 }
 
 .Slide {
-	animation: slide-in-bck-center 0.3s;
-}
-
-.Budget {
-	text-align: end;
-	margin-right: 25px;
-	color: aquamarine;
+  animation: slide-in-bck-center 0.3s;
 }

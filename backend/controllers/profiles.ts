@@ -4,7 +4,6 @@ import { ObjectId, FilterType, WithID } from "mongo"
 
 import { getDb } from "../config/db_client.ts"
 import type { Profile } from "../models/Profile.ts"
-import { DEFAULT_BUDGET as budget } from "./../config/consts.ts"
 import {
   extractContextBody,
   validateAction,
@@ -29,7 +28,7 @@ export async function getProfile(ctx: RouterContext) {
     if (!id) throw new Error("Profile id is missing")
     const _id = ObjectId(id)
 
-    const profile = await getDb().collection("profiles").find({ _id })
+    const profile = await getDb().collection("profiles").findOne({ _id })
     if (!profile) throw new Error("Profile Not Found")
     ctx.response.body = profile
   } catch (error) {
@@ -42,7 +41,7 @@ export async function addProfile(ctx: RouterContext) {
   try {
     const { name, img }: Profile = await extractContextBody(ctx)
     if (!name || !img) throw new Error("Incorrect profile data")
-    const profile: Profile = { name, img, budget, rentals: [] }
+    const profile: Profile = { name, img, rentals: [] }
     const _id = await getDb().collection("profiles").insertOne(profile)
     profile._id = _id
 
@@ -58,10 +57,11 @@ export async function rentMovie(ctx: RouterContext) {
     const { action, profile, movie } = helpers.getQuery(ctx, {
       mergeParams: true,
     })
+    const movieId = parseInt(movie)
     validateAction(action)
-    validateInputs(profile, movie)
-    const exists: WithID | null = await checkRentalExistence(profile, movie)
-    const command = getRentalCommand(action, exists, movie) as FilterType<
+    validateInputs(profile, movieId)
+    const exists: WithID | null = await checkRentalExistence(profile, movieId)
+    const command = getRentalCommand(action, exists, movieId) as FilterType<
       unknown
     >
 

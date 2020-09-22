@@ -7,9 +7,10 @@ import classes from "./Movie.module.css"
 
 import { RootState } from "../../../store/root/reducer"
 import { rent } from "../../../store/profiles/reducer"
-import { RENT_PRICE } from "../../../config/consts"
+
 import { MovieDetails } from "../../../api/responses"
 import Poster from "./Poster"
+import { Link } from "react-router-dom"
 
 interface Props extends MovieDetails {
   isRented: boolean
@@ -24,27 +25,23 @@ export default function Movie({
   const dispatch = useDispatch()
   const { currentProfile } = useSelector((state: RootState) => state.profiles)
 
-  const cantAffordRent = useCallback(
-    () => currentProfile!.budget - RENT_PRICE < 0,
-    [currentProfile]
-  )
   const rentalAction = useCallback(
     async (action: string, movie: number) => {
       try {
         const profile = currentProfile!._id.$oid
-        if (action === "rent" && cantAffordRent())
-          throw new Error("Insufficient funds")
         dispatch(rent({ action, profile, movie }))
       } catch (error) {
         console.error(error.message)
       }
     },
-    [currentProfile, cantAffordRent, dispatch]
+    [currentProfile, dispatch]
   )
 
   return (
     <div className={[classes.Movie, "slide-in-bck-center"].join(" ")}>
-      <Poster {...{ id, poster_path, original_title }} />
+      <Link to={`/movies/${id}?profile=${currentProfile?._id?.$oid}`}>
+        <Poster {...{ id, poster_path, original_title }} />
+      </Link>
       {isRented ? (
         <FontAwesomeIcon
           icon={faMinus}
