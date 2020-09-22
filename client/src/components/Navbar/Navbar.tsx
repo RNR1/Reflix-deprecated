@@ -21,7 +21,7 @@ export default function Navbar() {
       {currentProfile && (
         <Link
           className={classes.MainLink}
-          to={`/catalog?profile=${currentProfile?._id.$oid}`}
+          to={`/catalog?profile=${currentProfile._id.$oid}`}
         >
           Catalog
         </Link>
