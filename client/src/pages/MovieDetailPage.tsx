@@ -26,18 +26,22 @@ export default function MovieDetailPage() {
   }, [dispatch, currentProfile, profileId])
 
   useEffect(() => {
-    if (!movie) dispatch(fetchMovieById(id))
-  }, [dispatch, id, movie])
+    dispatch(fetchMovieById(id))
+  }, [dispatch, id])
 
   if (error) history.replace("/404")
-  if (!movie) return <Spinner />
+  if (!movie || !currentProfile) return <Spinner />
   return (
     <div className={classes.MovieDetail}>
       <h3 className={classes.Title}>
-        {movie.title} ({movie.year})
+        {movie.original_title} ({new Date(movie.release_date).getFullYear()})
       </h3>
-      <img className={classes.Img} src={movie.img} alt={movie.title} />
-      <p className={classes.Description}>{movie.description}</p>
+      <img
+        className={classes.Img}
+        src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+        alt={movie.original_title}
+      />
+      <p className={classes.Description}>{movie.overview}</p>
     </div>
   )
 }

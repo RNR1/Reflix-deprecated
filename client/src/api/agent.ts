@@ -1,33 +1,47 @@
 import axios, { AxiosResponse } from "axios"
 import Movie from "../models/Movie"
 import Profile from "../models/Profile"
+import { SearchResponse } from "./responses"
 
-const client = axios.create({
+const API_KEY = process.env.REACT_APP_MOVIES_API_KEY
+
+const profiles = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
+})
+
+const movies = axios.create({
+  baseURL: process.env.REACT_APP_MOVIES_API_URL,
 })
 
 const responseBody = (response: AxiosResponse) => response.data
 
-const requests = {
-  get: (url: string) => client.get(url).then(responseBody),
-  post: (url: string, body: {}) => client.post(url, body).then(responseBody),
-  put: (url: string, body?: {} | null) =>
-    client.put(url, body).then(responseBody),
-  delete: (url: string) => client.delete(url).then(responseBody),
-}
-
 export const Movies = {
-  list: (): Promise<Movie[]> => requests.get("/movies"),
-  movie: (id: string): Promise<Movie> => requests.get(`movie/${id}`),
+  trending: (): Promise<SearchResponse> =>
+    movies.get(`/trending/movie/week?api_key=${API_KEY}`).then(responseBody),
+  popular: (): Promise<SearchResponse> =>
+    movies
+      .get(`/movie/popular?api_key=${API_KEY}&language=en-US&page=1`)
+      .then(responseBody),
+  movie: (id: string): Promise<Movie> =>
+    movies.get(`/movie/${id}?api_key=${API_KEY}`).then(responseBody),
+  search: (value: string): Promise<SearchResponse> =>
+    movies
+      .get(
+        `/search/movie?query=${value}&api_key=${API_KEY}&language=en-US&page=1&include_adult=false`
+      )
+      .then(responseBody),
 }
 
 export const Profiles = {
-  list: (): Promise<Profile[]> => requests.get("/profiles"),
-  profile: (id: string): Promise<Profile> => requests.get(`/profile/${id}`),
+  list: (): Promise<Profile[]> => profiles.get("/profiles").then(responseBody),
+  profile: (id: string): Promise<Profile> =>
+    profiles.get(`/profile/${id}`).then(responseBody),
   rent: (
     action: string,
     profile: string,
-    movie: string
+    movie: number
   ): Promise<{ message: string }> =>
-    requests.put(`/profile/${action}?profile=${profile}&movie=${movie}`, null),
+    profiles
+      .put(`/profile/${action}?profile=${profile}&movie=${movie}`, null)
+      .then(responseBody),
 }

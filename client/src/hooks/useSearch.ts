@@ -1,8 +1,12 @@
-import { useEffect, useCallback, ChangeEvent } from "react"
+import { useEffect, useCallback, ChangeEvent, useState } from "react"
 
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../store/root/reducer"
-import { search, setDisplaySearch } from "../store/movies/reducer"
+import {
+  searchMovie,
+  setDisplaySearch,
+  setSearchValue,
+} from "../store/movies/reducer"
 
 export default function useSearch() {
   const dispatch = useDispatch()
@@ -10,17 +14,25 @@ export default function useSearch() {
     (state: RootState) => state.movies
   )
 
-  const handleChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) =>
-    dispatch(search(value))
+  const debouncedQuery = useDebounce(searchValue, 300)
 
-  const searchInProgress = () => searchValue.length > 0
+  const handleChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) =>
+    dispatch(setSearchValue(value))
+
+  const searchInProgress = () => debouncedQuery.length > 0
 
   const toggleSearch = () => {
     dispatch(setDisplaySearch(!displaySearch))
     if (displaySearch) clearSearch()
   }
 
-  const clearSearch = useCallback(() => dispatch(search("")), [dispatch])
+  const clearSearch = useCallback(() => dispatch(setSearchValue("")), [
+    dispatch,
+  ])
+
+  useEffect(() => {
+    if (debouncedQuery) dispatch(searchMovie(debouncedQuery))
+  }, [debouncedQuery, dispatch])
 
   useEffect(() => {
     return () => {
@@ -38,4 +50,24 @@ export default function useSearch() {
     searchValue,
     toggleSearch,
   }
+}
+
+function useDebounce(value: string, delay: number) {
+  const [debouncedValue, setDebouncedValue] = useState(value)
+
+  useEffect(
+    () => {
+      const handler = setTimeout(() => {
+        setDebouncedValue(value)
+      }, delay)
+
+      return () => {
+        clearTimeout(handler)
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [value]
+  )
+
+  return debouncedValue
 }

@@ -27,8 +27,8 @@ export default function CatalogPage() {
 
   useEffect(() => {
     if (!currentProfile) dispatch(fetchProfileById(profileId))
-    if (!movies.length) dispatch(fetchMoviesList())
-  }, [dispatch, movies, profileId, currentProfile])
+    dispatch(fetchMoviesList())
+  }, [dispatch, profileId, currentProfile])
 
   const catalogClasses = [classes.Slide, classes.Catalog]
   if (error) history.replace("/404")
@@ -43,9 +43,9 @@ export default function CatalogPage() {
       ) : (
         <>
           {currentProfile?.rentals?.length > 0 && (
-            <Movies movies={currentProfile.rentals} title="Rented" />
+            <Movies movies={[]} title="Rented" />
           )}
-          {movies?.length > 0 && <Movies movies={movies} title="Catalog" />}
+          {movies?.length > 0 && <Movies movies={movies} title="Trending" />}
         </>
       )}
     </div>

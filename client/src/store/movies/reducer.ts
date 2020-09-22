@@ -1,13 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import Movie from "../../models/Movie"
 import { Movies } from "../../api/agent"
+import { MovieDetails } from "../../api/responses"
 
 export interface MoviesState {
-  movies: Movie[]
+  movies: MovieDetails[]
   searchValue: string
-  searchResults: Movie[]
+  searchResults: MovieDetails[]
   displaySearch: boolean
-  currentMovie: Movie | null
+  currentMovie: MovieDetails | null
   error: string | null
 }
 
@@ -22,30 +22,25 @@ const initialState: MoviesState = {
 
 export const fetchMoviesList = createAsyncThunk(
   "movies/fetchMoviesList",
-  async () => {
-    return await Movies.list()
-  }
+  async () => (await Movies.trending()).results
 )
 
 export const fetchMovieById = createAsyncThunk(
   "movies/fetchMovieById",
-  async (id: string) => {
-    return await Movies.movie(id)
-  }
+  async (id: string) => await Movies.movie(id)
+)
+
+export const searchMovie = createAsyncThunk(
+  "movies/searchMovie",
+  async (value: string) => (await Movies.search(value)).results
 )
 
 const moviesSlice = createSlice({
   name: "movies",
   initialState,
   reducers: {
-    selectMovie(state, action) {
-      state.currentMovie = action.payload
-    },
-    search(state, action) {
+    setSearchValue(state, action) {
       state.searchValue = action.payload
-      state.searchResults = state.movies.filter(m =>
-        m.title.toLowerCase().includes(action.payload.toLowerCase())
-      )
     },
     setDisplaySearch(state, action: { payload: boolean }) {
       state.displaySearch = action.payload
@@ -53,7 +48,7 @@ const moviesSlice = createSlice({
   },
   extraReducers: {
     [fetchMoviesList.fulfilled.toString()]: (state, action) => {
-      state.movies = [...action.payload]
+      state.movies = action.payload
       state.error = null
     },
     [fetchMovieById.fulfilled.toString()]: (state, action) => {
@@ -65,9 +60,13 @@ const moviesSlice = createSlice({
       if (action.error.message.includes("404")) state.error = "Movie not found"
       else state.error = action.error.message
     },
+    [searchMovie.fulfilled.toString()]: (state, action) => {
+      state.searchResults = action.payload
+      state.error = null
+    },
   },
 })
 
 const { actions, reducer } = moviesSlice
-export const { selectMovie, search, setDisplaySearch } = actions
+export const { setSearchValue, setDisplaySearch } = actions
 export default reducer

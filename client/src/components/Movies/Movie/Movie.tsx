@@ -1,23 +1,26 @@
 import React, { useCallback } from "react"
-import { Link } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons"
+
 import classes from "./Movie.module.css"
 
-import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../../store/root/reducer"
 import { rent } from "../../../store/profiles/reducer"
 import { RENT_PRICE } from "../../../config/consts"
+import { MovieDetails } from "../../../api/responses"
+import Poster from "./Poster"
 
-interface Props {
-  _id: { $oid: string }
-  img: string
-  title: string
+interface Props extends MovieDetails {
   isRented: boolean
-  profile: string
 }
 
-export default function Movie({ _id, img, title, isRented, profile }: Props) {
+export default function Movie({
+  id,
+  poster_path,
+  original_title,
+  isRented,
+}: Props) {
   const dispatch = useDispatch()
   const { currentProfile } = useSelector((state: RootState) => state.profiles)
 
@@ -26,7 +29,7 @@ export default function Movie({ _id, img, title, isRented, profile }: Props) {
     [currentProfile]
   )
   const rentalAction = useCallback(
-    async (action: string, movie: string) => {
+    async (action: string, movie: number) => {
       try {
         const profile = currentProfile!._id.$oid
         if (action === "rent" && cantAffordRent())
@@ -41,20 +44,18 @@ export default function Movie({ _id, img, title, isRented, profile }: Props) {
 
   return (
     <div className={[classes.Movie, "slide-in-bck-center"].join(" ")}>
-      <Link to={`/movies/${_id.$oid}?profile=${profile}`}>
-        <img className={classes.Img} src={img} alt={title} />
-      </Link>
+      <Poster {...{ id, poster_path, original_title }} />
       {isRented ? (
         <FontAwesomeIcon
           icon={faMinus}
           className={classes.Icon}
-          onClick={() => rentalAction("return", _id.$oid)}
+          onClick={() => rentalAction("return", id)}
         />
       ) : (
         <FontAwesomeIcon
           icon={faPlus}
           className={classes.Icon}
-          onClick={() => rentalAction("rent", _id.$oid)}
+          onClick={() => rentalAction("rent", id)}
         />
       )}
     </div>

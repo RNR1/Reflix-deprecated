@@ -2,9 +2,8 @@ import React from "react"
 import classes from "./Movies.module.css"
 import MovieItem from "./Movie/Movie"
 import Spinner from "../Spinner/Spinner"
-import Movie from "../../models/Movie"
-import { useSelector } from "react-redux"
-import { RootState } from "../../store/root/reducer"
+
+import { MovieDetails } from "../../api/responses"
 
 function NoMatches() {
   return <h3 className={classes.NoMatches}>No Matching Results</h3>
@@ -12,13 +11,11 @@ function NoMatches() {
 
 interface Props {
   title: string
-  movies: Movie[]
+  movies: MovieDetails[]
   isSearching?: boolean
 }
 
 export default function Movies({ title, movies, isSearching }: Props) {
-  const { currentProfile } = useSelector((state: RootState) => state.profiles)
-
   return (
     <>
       <h3 className={classes.Title}>{title}</h3>
@@ -27,16 +24,7 @@ export default function Movies({ title, movies, isSearching }: Props) {
           <NoMatches />
         ) : movies.length ? (
           movies.map(movie => (
-            <MovieItem
-              key={movie._id.$oid}
-              isRented={
-                currentProfile!.rentals.findIndex(
-                  m => m._id.$oid === movie._id.$oid
-                ) >= 0
-              }
-              profile={currentProfile!._id.$oid}
-              {...movie}
-            />
+            <MovieItem key={movie.id} isRented={false} {...movie} />
           ))
         ) : (
           <Spinner />

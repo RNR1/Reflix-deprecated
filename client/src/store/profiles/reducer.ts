@@ -40,7 +40,7 @@ export const rent = createAsyncThunk(
     }: {
       action: string
       profile: string
-      movie: string
+      movie: number
     },
     { dispatch }
   ) => {
