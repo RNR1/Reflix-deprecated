@@ -3,7 +3,7 @@ import { parse } from "flags"
 import { config as env } from "dotenv"
 import { oakCors } from "cors"
 
-import { movies, profiles } from "./routes/index.ts"
+import { profiles } from "./routes/index.ts"
 import { connect } from "./config/db_client.ts"
 
 env()
@@ -17,8 +17,6 @@ const app = new Application()
 
 app.use(oakCors())
 
-app.use(movies.routes())
-app.use(movies.allowedMethods())
 app.use(profiles.routes())
 app.use(profiles.allowedMethods())
 

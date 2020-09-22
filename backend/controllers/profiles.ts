@@ -13,20 +13,9 @@ import {
   getRentalCommand,
 } from "../utils/helpers.ts"
 
-const lookupAggregation = {
-  $lookup: {
-    from: "movies",
-    localField: "rentals",
-    foreignField: "_id",
-    as: "rentals",
-  },
-}
-
 export async function getProfiles(ctx: RouterContext) {
   try {
-    const profiles = await getDb()
-      .collection<Profile[]>("profiles")
-      .aggregate([lookupAggregation])
+    const profiles = await getDb().collection<Profile[]>("profiles").find()
     ctx.response.body = profiles
   } catch (error) {
     ctx.response.status = 500
@@ -40,11 +29,9 @@ export async function getProfile(ctx: RouterContext) {
     if (!id) throw new Error("Profile id is missing")
     const _id = ObjectId(id)
 
-    const profile = await getDb()
-      .collection("profiles")
-      .aggregate([{ $match: { _id } }, lookupAggregation])
+    const profile = await getDb().collection("profiles").find({ _id })
     if (!profile) throw new Error("Profile Not Found")
-    ctx.response.body = profile[0]
+    ctx.response.body = profile
   } catch (error) {
     ctx.response.status = 404
     ctx.response.body = error.message
