@@ -9,7 +9,7 @@ import {
   validateAction,
   validateInputs,
   checkRentalExistence,
-  getRentalCommand,
+  getListCommand,
 } from "../utils/helpers.ts"
 
 export async function getProfiles(ctx: RouterContext) {
@@ -41,7 +41,7 @@ export async function addProfile(ctx: RouterContext) {
   try {
     const { name, img }: Profile = await extractContextBody(ctx)
     if (!name || !img) throw new Error("Incorrect profile data")
-    const profile: Profile = { name, img, rentals: [] }
+    const profile: Profile = { name, img, list: [] }
     const _id = await getDb().collection("profiles").insertOne(profile)
     profile._id = _id
 
@@ -52,7 +52,7 @@ export async function addProfile(ctx: RouterContext) {
   }
 }
 
-export async function rentMovie(ctx: RouterContext) {
+export async function listMovie(ctx: RouterContext) {
   try {
     const { action, profile, movie } = helpers.getQuery(ctx, {
       mergeParams: true,
@@ -61,14 +61,16 @@ export async function rentMovie(ctx: RouterContext) {
     validateAction(action)
     validateInputs(profile, movieId)
     const exists: WithID | null = await checkRentalExistence(profile, movieId)
-    const command = getRentalCommand(action, exists, movieId) as FilterType<
+    const command = getListCommand(action, exists, movieId) as FilterType<
       unknown
     >
 
     await getDb()
       .collection("profiles")
       .updateOne({ _id: ObjectId(profile) }, command)
-    ctx.response.body = { message: `movie has been ${action}ed successfully` }
+    let message: string = "Movie has been added to your list"
+    if (action === "remove") message = "Movie has been removed from you list"
+    ctx.response.body = { message }
   } catch (error) {
     ctx.response.status = 400
     ctx.response.body = { message: error.message }

@@ -6,30 +6,30 @@ import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons"
 import classes from "./Movie.module.css"
 
 import { RootState } from "../../../store/root/reducer"
-import { rent } from "../../../store/profiles/reducer"
+import { listMovie } from "../../../store/profiles/reducer"
 
 import { MovieDetails } from "../../../api/responses"
 import Poster from "./Poster"
 import { Link } from "react-router-dom"
 
 interface Props extends MovieDetails {
-  isRented: boolean
+  isListed: boolean
 }
 
 export default function Movie({
   id,
   poster_path,
   original_title,
-  isRented,
+  isListed,
 }: Props) {
   const dispatch = useDispatch()
   const { currentProfile } = useSelector((state: RootState) => state.profiles)
 
-  const rentalAction = useCallback(
+  const listAction = useCallback(
     async (action: string, movie: number) => {
       try {
         const profile = currentProfile!._id.$oid
-        dispatch(rent({ action, profile, movie }))
+        dispatch(listMovie({ action, profile, movie }))
       } catch (error) {
         console.error(error.message)
       }
@@ -42,17 +42,17 @@ export default function Movie({
       <Link to={`/movies/${id}?profile=${currentProfile?._id?.$oid}`}>
         <Poster {...{ id, poster_path, original_title }} />
       </Link>
-      {isRented ? (
+      {isListed ? (
         <FontAwesomeIcon
           icon={faMinus}
           className={classes.Icon}
-          onClick={() => rentalAction("return", id)}
+          onClick={() => listAction("remove", id)}
         />
       ) : (
         <FontAwesomeIcon
           icon={faPlus}
           className={classes.Icon}
-          onClick={() => rentalAction("rent", id)}
+          onClick={() => listAction("add", id)}
         />
       )}
     </div>

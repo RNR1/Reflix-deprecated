@@ -8,23 +8,23 @@ export async function extractContextBody(ctx: RouterContext) {
   const body = await ctx.request.body()
   return await body.value
 }
-export function getRentalCommand(
+export function getListCommand(
   action: string,
   exists: WithID | null,
   movie: number
 ) {
   let command
-  if (action === "rent") {
+  if (action === "add") {
     if (exists) throw new Error("Movie already rented")
     command = {
-      $addToSet: { rentals: movie },
+      $addToSet: { list: movie },
     }
   }
 
-  if (action === "return") {
+  if (action === "remove") {
     if (!exists) throw new Error("movie isn't rented")
     command = {
-      $pull: { rentals: movie },
+      $pull: { list: movie },
     }
   }
   return command
@@ -34,14 +34,14 @@ export function checkRentalExistence(profile: string, movie: number) {
     .collection("profiles")
     .findOne({
       _id: ObjectId(profile),
-      rentals: { $in: [movie] },
+      list: { $in: [movie] },
     })
 }
 export function validateInputs(profile: string, movie: number) {
   if (!profile || !movie) throw new Error("Profile and/or Movie are missing")
 }
 export function validateAction(action: string) {
-  if (action !== "rent" && action !== "return") {
+  if (action !== "add" && action !== "remove") {
     throw new Error("Invalid operation")
   }
 }

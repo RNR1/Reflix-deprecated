@@ -10,6 +10,7 @@ import { fetchMoviesList } from "../store/movies/reducer"
 import useQueryParams from "../hooks/useQueryParams"
 import { fetchProfileById } from "../store/profiles/reducer"
 import { useHistory } from "react-router-dom"
+import { MovieDetails } from "../api/responses"
 
 export default function CatalogPage() {
   const { currentProfile, movies, error } = useSelector((state: RootState) => ({
@@ -39,8 +40,11 @@ export default function CatalogPage() {
         <Movies movies={searchResults} title="Search Results" isSearching />
       ) : (
         <>
-          {currentProfile?.rentals?.length > 0 && (
-            <Movies movies={[]} title="Rented" />
+          {currentProfile?.list?.length > 0 && (
+            <Movies
+              movies={currentProfile.list as MovieDetails[]}
+              title="My List"
+            />
           )}
           {Object.entries(movies).map(([category, movies]) => (
             <Movies key={category} movies={movies} title={category} />

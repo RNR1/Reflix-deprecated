@@ -1,6 +1,6 @@
 import React from "react"
 import classes from "./Movies.module.css"
-import MovieItem from "./Movie/Movie"
+import Movie from "./Movie/Movie"
 import Spinner from "../Spinner/Spinner"
 
 import { MovieDetails } from "../../api/responses"
@@ -24,7 +24,7 @@ export default function Movies({ title, movies, isSearching }: Props) {
           <NoMatches />
         ) : movies.length ? (
           movies.map(movie => (
-            <MovieItem key={movie.id} isRented={false} {...movie} />
+            <Movie key={movie.id} isListed={false} {...movie} />
           ))
         ) : (
           <Spinner />

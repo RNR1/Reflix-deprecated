@@ -40,7 +40,7 @@ export const Profiles = {
   list: (): Promise<Profile[]> => profiles.get("/profiles").then(responseBody),
   profile: (id: string): Promise<Profile> =>
     profiles.get(`/profile/${id}`).then(responseBody),
-  rent: (
+  listMovie: (
     action: string,
     profile: string,
     movie: number

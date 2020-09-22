@@ -30,8 +30,8 @@ export const fetchProfileById = createAsyncThunk(
   }
 )
 
-export const rent = createAsyncThunk(
-  "profiles/rent",
+export const listMovie = createAsyncThunk(
+  "profiles/listMovie",
   async (
     {
       action,
@@ -44,7 +44,7 @@ export const rent = createAsyncThunk(
     },
     { dispatch }
   ) => {
-    await Profiles.rent(action, profile, movie)
+    await Profiles.listMovie(action, profile, movie)
     dispatch(fetchProfileById(profile))
   }
 )
@@ -73,7 +73,7 @@ const profilesSlice = createSlice({
         state.error = "Profile not found"
       else state.error = action.error.message
     },
-    [rent.rejected.toString()]: (state, action) => {
+    [listMovie.rejected.toString()]: (state, action) => {
       state.error = action.error.message
     },
   },

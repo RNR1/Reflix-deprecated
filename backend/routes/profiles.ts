@@ -8,6 +8,6 @@ router
   .get(`/profiles`, profilesController.getProfiles)
   .get(`/profile/:id`, profilesController.getProfile)
   .post(`/profile`, profilesController.addProfile)
-  .put(`/profile/:action`, profilesController.rentMovie)
+  .put(`/profile/:action`, profilesController.listMovie)
 
 export default router
