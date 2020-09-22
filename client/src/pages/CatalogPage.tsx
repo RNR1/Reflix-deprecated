@@ -42,7 +42,9 @@ export default function CatalogPage() {
           {currentProfile?.rentals?.length > 0 && (
             <Movies movies={[]} title="Rented" />
           )}
-          {movies?.length > 0 && <Movies movies={movies} title="Trending" />}
+          {Object.entries(movies).map(([category, movies]) => (
+            <Movies key={category} movies={movies} title={category} />
+          ))}
         </>
       )}
     </div>

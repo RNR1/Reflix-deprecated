@@ -3,7 +3,7 @@ import { Movies } from "../../api/agent"
 import { MovieDetails } from "../../api/responses"
 
 export interface MoviesState {
-  movies: MovieDetails[]
+  movies: { [category: string]: MovieDetails[] }
   searchValue: string
   searchResults: MovieDetails[]
   displaySearch: boolean
@@ -12,7 +12,7 @@ export interface MoviesState {
 }
 
 const initialState: MoviesState = {
-  movies: [],
+  movies: {},
   searchValue: "",
   searchResults: [],
   displaySearch: false,
@@ -22,7 +22,18 @@ const initialState: MoviesState = {
 
 export const fetchMoviesList = createAsyncThunk(
   "movies/fetchMoviesList",
-  async () => (await Movies.trending()).results
+  async () =>
+    Promise.all([Movies.trending(), Movies.popular(), Movies.topRated()]).then(
+      ([
+        { results: trending },
+        { results: popular },
+        { results: topRated },
+      ]) => ({
+        "Trending Now": trending,
+        "Popular on Reflix": popular,
+        "Top Rated": topRated,
+      })
+    )
 )
 
 export const fetchMovieById = createAsyncThunk(

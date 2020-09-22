@@ -22,6 +22,10 @@ export const Movies = {
     movies
       .get(`/movie/popular?api_key=${API_KEY}&language=en-US&page=1`)
       .then(responseBody),
+  topRated: (): Promise<SearchResponse> =>
+    movies
+      .get(`/movie/top_rated?api_key=${API_KEY}&language=en-US`)
+      .then(responseBody),
   movie: (id: string): Promise<Movie> =>
     movies.get(`/movie/${id}?api_key=${API_KEY}`).then(responseBody),
   search: (value: string): Promise<SearchResponse> =>
