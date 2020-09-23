@@ -1,9 +1,9 @@
 # Reflix
 
-Reflix is a single page movie rental app built with React, Deno and MongoDB.
-Users are able to choose their user and rent movies based on their budget.
-Each user has a unique budget.
-Users can also click on the movie to see more information about the movie.
+Reflix is a netflix clone application built with React, Deno and MongoDB.
+Users can access their profile, view an updated list of movies, and search for various titles.
+Users can also click on a movie to see more information about it.
+Movies data provided by [The Movie Database](https://www.themoviedb.org/).
 
 Demo: [https://rons-reflix.vercel.app/](https://rons-reflix.vercel.app/)
 
@@ -14,9 +14,9 @@ Demo: [https://rons-reflix.vercel.app/](https://rons-reflix.vercel.app/)
   - [Installation](#installation)
   - [Screenshots](#screenshots)
     - [Who's watching?](#whos-watching)
-    - [Movie Catalog](#movie-catalog)
+    - [Catalog](#catalog)
     - [Search Filter](#search-filter)
-    - [Rented Movies](#rented-movies)
+    - [My List](#my-list)
     - [Movie Details](#movie-details)
   - [Tech-stack - Client](#tech-stack---client)
   - [Tech-stack - Backend](#tech-stack---backend)
@@ -27,9 +27,10 @@ Demo: [https://rons-reflix.vercel.app/](https://rons-reflix.vercel.app/)
 2. Run `yarn install-client` to install client app dependencies.
 3. Run `yarn dotenv` to generate .env files for both client and server.
 4. Enter database credentials in `./backend/.env`.
-5. Run `yarn server`.
-6. Run `yarn client` to start client app.
-7. Navigate to `http://localhost:3000`.
+5. Enter TMDB api key in `./client/.env`.
+6. Run `yarn server` to start profiles server.
+7. Run `yarn client` to start client app.
+8. Navigate to `http://localhost:3000`.
 
 ## Screenshots
 
@@ -39,34 +40,32 @@ Main screen for user to select who they are.
 
 <p align="center"><img src="assets/profiles.png" width="300" /></p>
 
-### Movie Catalog
-
-A user can see their budget and all the available movies to rent.
+### Catalog
 
 <p align="center"><img src="assets/catalog.png" width="300" /></p>
 
 ### Search Filter
 
-As a user searches the movie catalog filters the movie based on the name.
+Search by movie title.
 
 <p align="center"><img src="assets/search-filter.png" width="300" /></p>
 
-### Rented Movies
+### My List
 
-Once a user rents a movie/s a new 'Rented' section appears on the page showing which movies they have rented.
+Once a user clicks on the plus button of each movie, it is being added to his list.
 
-<p align="center"><img src="assets/rented.png" width="300" /></p>
+<p align="center"><img src="assets/my-list.png" width="300" /></p>
 
 ### Movie Details
 
-A user can click on a movie to see more information about the movie.
+A user can click on a movie to see more information about it.
 
 <p align="center"><img src="assets/movie-detail.png" width="300" /></p>
 
 ## Tech-stack - Client
 
 1. TypeScript.
-2. UI - React.
+2. UI - React, styled components.
 3. State management - Redux toolkit.
 4. HTTP Client - Axios.
 
