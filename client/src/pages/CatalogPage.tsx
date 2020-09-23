@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 
-import classes from "../style/Catalog.module.css"
+import styled from "styled-components"
 import Movies from "../components/Movies/Movies"
 import useSearch from "../hooks/useSearch"
 import Spinner from "../components/Spinner/Spinner"
@@ -31,11 +31,10 @@ export default function CatalogPage() {
     dispatch(fetchMoviesList())
   }, [dispatch, profileId, currentProfile])
 
-  const catalogClasses = [classes.Slide, classes.Catalog]
   if (error) history.replace("/404")
   if (!currentProfile) return <Spinner />
   return (
-    <div className={catalogClasses.join(" ")}>
+    <Container>
       {searchInProgress() ? (
         <Movies movies={searchResults} title="Search Results" isSearching />
       ) : (
@@ -51,6 +50,12 @@ export default function CatalogPage() {
           ))}
         </>
       )}
-    </div>
+    </Container>
   )
 }
+
+const Container = styled.div`
+  width: 100%;
+  margin: 80px auto;
+  animation: slide-in-bck-center 0.3s;
+`
