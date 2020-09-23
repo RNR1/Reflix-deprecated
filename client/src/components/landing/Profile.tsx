@@ -1,7 +1,7 @@
 import React from "react"
 
 import { useDispatch } from "react-redux"
-import { selectProfile } from "../../store/profiles/reducer"
+import { fetchProfileById } from "../../store/profiles/reducer"
 import IProfile from "../../models/Profile"
 import styled from "styled-components"
 
@@ -9,7 +9,7 @@ export default function Profile({ _id, img, name }: IProfile) {
   const dispatch = useDispatch()
 
   const onClick = () => {
-    dispatch(selectProfile(_id.$oid))
+    dispatch(fetchProfileById(_id.$oid))
   }
 
   return (

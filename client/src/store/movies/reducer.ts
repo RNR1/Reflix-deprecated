@@ -38,7 +38,7 @@ export const fetchMoviesList = createAsyncThunk(
 
 export const fetchMovieById = createAsyncThunk(
   "movies/fetchMovieById",
-  async (id: string) => await Movies.movie(id)
+  async (id: number) => await Movies.movie(id)
 )
 
 export const searchMovie = createAsyncThunk(

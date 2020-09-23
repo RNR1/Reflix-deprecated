@@ -9,19 +9,13 @@ import { Link } from "react-router-dom"
 import styled from "styled-components"
 import ListAction from "./ListAction"
 
-interface Props extends MovieDetails {
-  isListed: boolean
-}
+interface Props extends MovieDetails {}
 
-export default function Movie({
-  isListed,
-  id,
-  poster_path,
-  original_title,
-}: Props) {
-  const { _id } = useSelector(
+export default function Movie({ id, poster_path, original_title }: Props) {
+  const { _id, list } = useSelector(
     (state: RootState) => state.profiles.currentProfile!
   )
+  const isListed = (list as MovieDetails[]).find(movie => movie.id === id)
 
   return (
     <Container>

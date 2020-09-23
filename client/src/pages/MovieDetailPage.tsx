@@ -26,7 +26,7 @@ export default function MovieDetailPage() {
   }, [dispatch, currentProfile, profileId])
 
   useEffect(() => {
-    dispatch(fetchMovieById(id))
+    dispatch(fetchMovieById(+id))
   }, [dispatch, id])
 
   if (error) history.replace("/404")

@@ -1,7 +1,6 @@
 import axios, { AxiosResponse } from "axios"
-import Movie from "../models/Movie"
 import Profile from "../models/Profile"
-import { SearchResponse } from "./responses"
+import { MovieDetails, SearchResponse } from "./responses"
 
 const API_KEY = process.env.REACT_APP_MOVIES_API_KEY
 
@@ -26,7 +25,7 @@ export const Movies = {
     movies
       .get(`/movie/top_rated?api_key=${API_KEY}&language=en-US`)
       .then(responseBody),
-  movie: (id: string): Promise<Movie> =>
+  movie: (id: number): Promise<MovieDetails> =>
     movies.get(`/movie/${id}?api_key=${API_KEY}`).then(responseBody),
   search: (value: string): Promise<SearchResponse> =>
     movies
@@ -34,12 +33,14 @@ export const Movies = {
         `/search/movie?query=${value}&api_key=${API_KEY}&language=en-US&page=1&include_adult=false`
       )
       .then(responseBody),
+  list: (list: number[]): Promise<MovieDetails[]> =>
+    Promise.all(list.map(id => Movies.movie(id))),
 }
 
 export const Profiles = {
   list: (): Promise<Profile[]> => profiles.get("/profiles").then(responseBody),
-  profile: (id: string): Promise<Profile> =>
-    profiles.get(`/profile/${id}`).then(responseBody),
+  profile: async (id: string): Promise<Profile> =>
+    await profiles.get<Profile>(`/profile/${id}`).then(transformMoviesList),
   listMovie: (
     action: string,
     profile: string,
@@ -48,4 +49,10 @@ export const Profiles = {
     profiles
       .put(`/profile/${action}?profile=${profile}&movie=${movie}`, null)
       .then(responseBody),
+}
+
+async function transformMoviesList({ data: profile }: AxiosResponse<Profile>) {
+  const list = await Movies.list(profile.list as number[])
+  profile.list = list
+  return profile
 }

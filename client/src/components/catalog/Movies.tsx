@@ -22,9 +22,7 @@ export default function Movies({ title, list, isSearching }: Props) {
         {isSearching && !list.length ? (
           <NoMatches />
         ) : list.length ? (
-          list.map(movie => (
-            <Movie key={movie.id} isListed={false} {...movie} />
-          ))
+          list.map(movie => <Movie key={movie.id} {...movie} />)
         ) : (
           <Spinner />
         )}
