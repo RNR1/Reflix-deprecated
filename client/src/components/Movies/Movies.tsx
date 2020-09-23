@@ -1,7 +1,7 @@
 import React from "react"
 import classes from "./Movies.module.css"
 import Movie from "./Movie/Movie"
-import Spinner from "../Spinner/Spinner"
+import Spinner from "../Layout/Spinner"
 
 import { MovieDetails } from "../../api/responses"
 
