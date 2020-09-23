@@ -2,3 +2,4 @@ backend/.env
 .vscode
 backend/.deno_plugins
 client/.env
+node_modules
