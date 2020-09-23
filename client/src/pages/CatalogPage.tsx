@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 
 import styled from "styled-components"
-import Movies from "../components/Movies/Movies"
+import Movies from "../components/catalog/Movies"
 import useSearch from "../hooks/useSearch"
 import Spinner from "../components/Layout/Spinner"
 import { RootState } from "../store/root/reducer"
@@ -36,17 +36,17 @@ export default function CatalogPage() {
   return (
     <Container>
       {searchInProgress() ? (
-        <Movies movies={searchResults} title="Search Results" isSearching />
+        <Movies list={searchResults} title="Search Results" isSearching />
       ) : (
         <>
           {currentProfile?.list?.length > 0 && (
             <Movies
-              movies={currentProfile.list as MovieDetails[]}
+              list={currentProfile.list as MovieDetails[]}
               title="My List"
             />
           )}
           {Object.entries(movies).map(([category, movies]) => (
-            <Movies key={category} movies={movies} title={category} />
+            <Movies key={category} list={movies} title={category} />
           ))}
         </>
       )}

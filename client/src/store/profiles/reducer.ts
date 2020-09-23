@@ -38,7 +38,7 @@ export const listMovie = createAsyncThunk(
       profile,
       movie,
     }: {
-      action: string
+      action: "add" | "remove"
       profile: string
       movie: number
     },
