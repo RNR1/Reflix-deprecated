@@ -1,6 +1,6 @@
 import { combineReducers } from "@reduxjs/toolkit"
-import profiles from "../profiles/reducer"
-import movies from "../movies/reducer"
+import profiles from "store/profiles/reducer"
+import movies from "store/movies/reducer"
 
 const rootReducer = combineReducers({
   profiles,
