@@ -1,8 +1,8 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams, useHistory } from "react-router-dom"
+import styled from "styled-components"
 
-import classes from "../style/MovieDetail.module.css"
 import Spinner from "../components/Layout/Spinner"
 import { RootState } from "../store/root/reducer"
 import { fetchMovieById } from "../store/movies/reducer"
@@ -32,12 +32,11 @@ export default function MovieDetailPage() {
   if (error) history.replace("/404")
   if (!movie || !currentProfile) return <Spinner />
   return (
-    <div className={classes.MovieDetail}>
-      <h3 className={classes.Title}>
+    <Container>
+      <h3>
         {movie.original_title} ({new Date(movie.release_date).getFullYear()})
       </h3>
       <img
-        className={classes.Img}
         src={
           movie.poster_path
             ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
@@ -45,7 +44,31 @@ export default function MovieDetailPage() {
         }
         alt={movie.original_title}
       />
-      <p className={classes.Description}>{movie.overview}</p>
-    </div>
+      <p className="description">{movie.overview}</p>
+    </Container>
   )
 }
+
+const Container = styled.div`
+  display: block;
+  height: 100%;
+  text-align: center;
+  margin-top: 80px;
+  animation: slide-in-bck-center 0.5s;
+  color: white;
+
+  & img {
+    margin-top: 10px;
+    height: 40vh;
+  }
+
+  & .description {
+    margin: 15px auto;
+    max-width: 700px;
+    color: white;
+    font-size: 1em;
+    @media (max-width: 768px) {
+      font-size: 0.9em;
+    }
+  }
+`
