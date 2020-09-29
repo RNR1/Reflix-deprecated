@@ -1,33 +1,28 @@
 import React, { PropsWithChildren } from "react"
 
-import Logo from "../Logo/Logo"
-import Navbar from "../Navbar/Navbar"
+import Logo from "./Logo"
+import Navbar from "./Navbar"
 import Search from "../Search/Search"
 import { useLocation } from "react-router-dom"
 import useSearch from "../../hooks/useSearch"
 import useCurrentWidth from "../../hooks/useCurrentWidth"
 import styled from "styled-components"
+import { GlobalStyle } from "./GlobalStyle"
 
 export default function Layout({ children }: PropsWithChildren<{}>) {
   const { pathname } = useLocation()
-  const { displaySearch, handleChange, searchValue, toggleSearch } = useSearch()
+  const { displaySearch } = useSearch()
   const width = useCurrentWidth()
   const lg = width > 575
   const displayNavbar = (!displaySearch || lg) && pathname !== "/"
 
   return (
     <Container>
+      <GlobalStyle />
       <Header>
         <Logo />
         {displayNavbar && <Navbar />}
-        {pathname === "/catalog" && (
-          <Search
-            onChange={handleChange}
-            displaySearch={displaySearch}
-            onClick={toggleSearch}
-            value={searchValue}
-          />
-        )}
+        {pathname === "/catalog" && <Search />}
       </Header>
       <main>{children}</main>
     </Container>

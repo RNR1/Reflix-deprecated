@@ -5,7 +5,6 @@ import { Provider } from "react-redux"
 
 import store from "./store/root/store"
 
-import "./style/index.css"
 import * as serviceWorker from "./serviceWorker"
 
 const render = () => {
