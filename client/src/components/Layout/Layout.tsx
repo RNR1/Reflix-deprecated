@@ -1,13 +1,10 @@
 import React, { PropsWithChildren } from "react"
-
-import Logo from "./Logo"
-import Navbar from "./Navbar"
-import Search from "../Search/Search"
 import { useLocation } from "react-router-dom"
+import styled from "styled-components"
+
+import { Logo, Navbar, Search, GlobalStyle } from "."
 import useSearch from "../../hooks/useSearch"
 import useCurrentWidth from "../../hooks/useCurrentWidth"
-import styled from "styled-components"
-import { GlobalStyle } from "./GlobalStyle"
 
 export default function Layout({ children }: PropsWithChildren<{}>) {
   const { pathname } = useLocation()

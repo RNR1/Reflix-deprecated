@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useParams, useHistory } from "react-router-dom"
 import styled from "styled-components"
 
-import Spinner from "../components/Layout/Spinner"
+import Spinner from "../components/layout/Spinner"
 import { RootState } from "../store/root/reducer"
 import { fetchMovieById } from "../store/movies/reducer"
 import { fetchProfileById } from "../store/profiles/reducer"

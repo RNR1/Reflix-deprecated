@@ -1,10 +1,9 @@
 import React from "react"
+import styled from "styled-components"
 
 import Movie from "./Movie"
-import Spinner from "../Layout/Spinner"
-
+import Spinner from "../layout/Spinner"
 import { MovieDetails } from "../../api/responses"
-import styled from "styled-components"
 
 const NoMatches = () => <h3 className="no-matches">No Matching Results</h3>
 

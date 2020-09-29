@@ -1,13 +1,11 @@
 import React from "react"
 import { useSelector } from "react-redux"
-
-import { RootState } from "../../store/root/reducer"
-
-import { MovieDetails } from "../../api/responses"
-import Poster from "./Poster"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
-import ListAction from "./ListAction"
+
+import { ListAction, Poster } from "."
+import { RootState } from "../../store/root/reducer"
+import { MovieDetails } from "../../api/responses"
 
 interface Props extends MovieDetails {}
 

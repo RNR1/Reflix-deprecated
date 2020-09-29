@@ -1,0 +1,6 @@
+export { GlobalStyle } from "./GlobalStyle"
+export { default as Layout } from "./Layout"
+export { default as Logo } from "./Logo"
+export { default as Navbar } from "./Navbar"
+export { default as Search } from "./Search"
+export { default as Spinner } from "./Spinner"

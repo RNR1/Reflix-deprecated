@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react"
+import styled from "styled-components"
 
 export default function NotFound() {
-	return (
-		<h1 style={{ marginTop: 80, textAlign: 'center', color: '#fff' }}>
-			Page Not Found!
-		</h1>
-	)
+  return <Title>Page Not Found!</Title>
 }
+
+const Title = styled.h1`
+  margin-top: 80px;
+  text-align: center;
+  color: #fff;
+`

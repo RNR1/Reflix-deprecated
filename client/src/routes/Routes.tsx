@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from "react"
 import { Switch, Route, Redirect } from "react-router-dom"
-import Spinner from "../components/Layout/Spinner"
+import Spinner from "../components/layout/Spinner"
 
 const LandingPage = lazy(() => import("../pages/LandingPage"))
 const CatalogPage = lazy(() => import("../pages/CatalogPage"))
