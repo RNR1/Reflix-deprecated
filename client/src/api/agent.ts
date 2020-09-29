@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios"
-import Profile from "../models/Profile"
-import { MovieDetails, SearchResponse } from "./responses"
+import type Profile from "../models/Profile"
+import type { MovieDetails, SearchResponse } from "./responses"
 
 const API_KEY = process.env.REACT_APP_MOVIES_API_KEY
 

@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import styled from "styled-components"
 
-import Profiles from "../components/landing/Profiles"
-import Spinner from "../components/layout/Spinner"
-import { fetchProfilesList } from "../store/profiles/reducer"
-import { RootState } from "../store/root/reducer"
+import Profiles from "components/landing/Profiles"
+import Spinner from "components/layout/Spinner"
+import { fetchProfilesList } from "store/profiles/reducer"
+import type { RootState } from "store/root/reducer"
 
 export default function LandingPage() {
   const dispatch = useDispatch()

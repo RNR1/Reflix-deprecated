@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 
 import Profile from "./Profile"
-import IProfile from "../../models/Profile"
+import type IProfile from "models/Profile"
 
 interface Props {
   list: IProfile[]

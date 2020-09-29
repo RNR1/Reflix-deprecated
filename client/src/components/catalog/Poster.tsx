@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { MovieDetails } from "../../api/responses"
+import type { MovieDetails } from "api/responses"
 
 export default function Poster({
   poster_path,

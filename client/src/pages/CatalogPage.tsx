@@ -3,14 +3,14 @@ import { useHistory } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import styled from "styled-components"
 
-import Movies from "../components/catalog/Movies"
-import Spinner from "../components/layout/Spinner"
-import useSearch from "../hooks/useSearch"
-import useQueryParams from "../hooks/useQueryParams"
-import type { RootState } from "../store/root/reducer"
-import { fetchMoviesList } from "../store/movies/reducer"
-import { fetchProfileById } from "../store/profiles/reducer"
-import { MovieDetails } from "../api/responses"
+import Movies from "components/catalog/Movies"
+import Spinner from "components/layout/Spinner"
+import useSearch from "hooks/useSearch"
+import useQueryParams from "hooks/useQueryParams"
+import type { RootState } from "store/root/reducer"
+import { fetchMoviesList } from "store/movies/reducer"
+import { fetchProfileById } from "store/profiles/reducer"
+import type { MovieDetails } from "api/responses"
 
 export default function CatalogPage() {
   const { currentProfile, movies, error } = useSelector((state: RootState) => ({

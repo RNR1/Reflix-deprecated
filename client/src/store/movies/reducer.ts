@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import { Movies } from "../../api/agent"
-import { MovieDetails } from "../../api/responses"
+import { Movies } from "api/agent"
+import type { MovieDetails } from "api/responses"
 
 export interface MoviesState {
   movies: { [category: string]: MovieDetails[] }

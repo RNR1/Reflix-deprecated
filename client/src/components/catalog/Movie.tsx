@@ -4,8 +4,8 @@ import { Link } from "react-router-dom"
 import styled from "styled-components"
 
 import { ListAction, Poster } from "."
-import { RootState } from "../../store/root/reducer"
-import { MovieDetails } from "../../api/responses"
+import type { RootState } from "store/root/reducer"
+import type { MovieDetails } from "api/responses"
 
 interface Props extends MovieDetails {}
 

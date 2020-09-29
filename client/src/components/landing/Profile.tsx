@@ -1,9 +1,9 @@
 import React from "react"
-
 import { useDispatch } from "react-redux"
-import { fetchProfileById } from "../../store/profiles/reducer"
-import IProfile from "../../models/Profile"
 import styled from "styled-components"
+
+import { fetchProfileById } from "store/profiles/reducer"
+import type IProfile from "models/Profile"
 
 export default function Profile({ _id, img, name }: IProfile) {
   const dispatch = useDispatch()

@@ -1,12 +1,12 @@
 import { useEffect, useCallback, ChangeEvent, useState } from "react"
-
 import { useSelector, useDispatch } from "react-redux"
-import { RootState } from "../store/root/reducer"
+
+import type { RootState } from "store/root/reducer"
 import {
   searchMovie,
   setDisplaySearch,
   setSearchValue,
-} from "../store/movies/reducer"
+} from "store/movies/reducer"
 
 export default function useSearch() {
   const dispatch = useDispatch()

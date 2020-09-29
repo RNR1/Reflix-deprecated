@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import Profile from "../../models/Profile"
-import { Profiles } from "../../api/agent"
+import type Profile from "models/Profile"
+import { Profiles } from "api/agent"
 
 export interface ProfilesState {
   profiles: Profile[]

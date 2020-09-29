@@ -1,4 +1,4 @@
-import { MovieDetails } from "../api/responses"
+import type { MovieDetails } from "../api/responses"
 
 export default interface Profile {
   _id: { $oid: string }

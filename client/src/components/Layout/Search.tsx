@@ -2,7 +2,8 @@ import React from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import styled from "styled-components"
-import useSearch from "../../hooks/useSearch"
+
+import useSearch from "hooks/useSearch"
 
 export default function Search() {
   const { displaySearch, handleChange, searchValue, toggleSearch } = useSearch()

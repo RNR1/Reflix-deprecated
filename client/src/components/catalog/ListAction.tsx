@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons"
 import styled from "styled-components"
 
-import { listMovie } from "../../store/profiles/reducer"
-import { RootState } from "../../store/root/reducer"
+import { listMovie } from "store/profiles/reducer"
+import type { RootState } from "store/root/reducer"
 
 interface Props {
   action: "add" | "remove"
