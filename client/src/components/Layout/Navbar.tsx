@@ -13,7 +13,7 @@ export default function Navbar() {
   return (
     <Links>
       <Link onClick={() => dispatch(selectProfile(null))} to="/">
-        Home
+        Profiles
       </Link>
       {currentProfile && (
         <Link to={`/catalog?profile=${currentProfile._id.$oid}`}>Catalog</Link>

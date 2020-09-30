@@ -1,9 +1,17 @@
 import React from "react"
+import { useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 
+import { selectProfile } from "store/profiles/reducer"
+
 export default function Logo() {
-  return <BrandLink to="/">REFLIX</BrandLink>
+  const dispatch = useDispatch()
+  return (
+    <BrandLink onClick={() => dispatch(selectProfile(null))} to="/">
+      REFLIX
+    </BrandLink>
+  )
 }
 
 const BrandLink = styled(Link)`
