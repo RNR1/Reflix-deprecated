@@ -3,8 +3,9 @@ import { useHistory } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import styled from "styled-components"
 
-import Movies from "components/catalog/Movies"
+import { Carousel, Movies } from "components/catalog"
 import Spinner from "components/layout/Spinner"
+import useCurrentWidth from "hooks/useCurrentWidth"
 import useSearch from "hooks/useSearch"
 import useQueryParams from "hooks/useQueryParams"
 import type { RootState } from "store/root/reducer"
@@ -20,9 +21,10 @@ export default function CatalogPage() {
   }))
 
   const query = useQueryParams()
-  const profileId = query.get("profile")!
   const dispatch = useDispatch()
   const history = useHistory()
+  const moviesPerSection = useMoviesPerSection()
+  const profileId = query.get("profile")!
 
   const { searchInProgress, searchResults } = useSearch()
 
@@ -40,18 +42,35 @@ export default function CatalogPage() {
       ) : (
         <>
           {currentProfile?.list?.length > 0 && (
-            <Movies
+            <Carousel
+              moviesPerSection={moviesPerSection}
               list={currentProfile.list as MovieDetails[]}
               title="My List"
             />
           )}
           {Object.entries(movies).map(([category, movies]) => (
-            <Movies key={category} list={movies} title={category} />
+            <Carousel
+              key={category}
+              moviesPerSection={moviesPerSection}
+              list={movies}
+              title={category}
+            />
           ))}
         </>
       )}
     </Container>
   )
+}
+
+function useMoviesPerSection(): number {
+  const width = useCurrentWidth()
+  const [xs, sm, md, lg] = [414, 540, 768, 1024]
+
+  if (width > lg) return 7
+  if (width > md) return 5
+  if (width > sm) return 4
+  if (width > xs) return 2
+  return 1
 }
 
 const Container = styled.div`

@@ -26,6 +26,13 @@ export default function Movie({ id, poster_path, original_title }: Props) {
 }
 
 const Container = styled.div`
-  padding: 5px;
+  padding: 0 2px;
+  transition: 250ms all;
+
+  &:hover {
+    margin: 0 40px;
+    transform: scale(1.2);
+    z-index: 1;
+  }
   animation: slide-in-bck-center 0.3s;
 `
