@@ -37,6 +37,7 @@ const Icon = styled(FontAwesomeIcon)`
   border-radius: 50%;
   padding: 3px;
   cursor: pointer;
+  z-index: 4;
 
   &:active {
     font-size: 80%;

@@ -76,7 +76,6 @@ const Section = styled.section<{ moviesPerSection: number }>`
     width: 80px;
     padding: 20px;
     text-align: center;
-    z-index: 2;
 
     &:hover {
       cursor: pointer;
